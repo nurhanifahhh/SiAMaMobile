@@ -1,17 +1,44 @@
 part of 'pages.dart';
 
 class SignInPage extends StatefulWidget {
+  // static String tag = 'UserLogin';
+
   @override
   _SignInPageState createState() => _SignInPageState();
 }
 
 class _SignInPageState extends State<SignInPage> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  void authentication() {
+    UserLoginModel userLoginModel = new UserLoginModel(
+        nim: emailController.text, password: passwordController.text);
+
+    var requestBody = jsonEncode(userLoginModel.toJson());
+    print(requestBody);
+    UserLoginServices.authentication(requestBody).then((value) {
+      final result = value;
+      if (result.success == true && result.code == 200) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => HomePage()),
+        );
+      } else {
+        print(requestBody);
+      }
+    }).catchError((error) {});
+    print(requestBody);
+  }
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-    bool isLoading = false;
-
     return ClosePage(
       child: Column(
         children: [
@@ -110,6 +137,7 @@ class _SignInPageState extends State<SignInPage> {
                   )
                 : RaisedButton(
                     onPressed: () {
+                      authentication();
                       //Navigator.pushNamed(context, '/si');
                     },
                     elevation: 0,

@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: ScreenPage(),
+        home: HomePage(),
         routes: <String, WidgetBuilder>{
           '/screen_page': (BuildContext context) => ScreenPage(),
           '/sign_in_page': (BuildContext context) => SignInPage(),

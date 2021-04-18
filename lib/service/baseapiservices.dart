@@ -1,6 +1,5 @@
 // part of 'serviceapi.dart';
-import 'package:siamauji1/service/apiresponse.dart';
-import 'package:http/http.dart' as http;
+part of '../ui/pages/pages.dart';
 
 class BaseApiService {
   static Future<ApiResponse> sendPostRequest(

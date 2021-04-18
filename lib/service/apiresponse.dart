@@ -1,8 +1,4 @@
-// To parse this JSON data, do
-//
-//     final apiResponse = apiResponseFromJson(jsonString);
-
-import 'dart:convert';
+part of '../ui/pages/pages.dart';
 
 ApiResponse apiResponseFromJson(String str) =>
     ApiResponse.fromJson(json.decode(str));
