@@ -21,7 +21,7 @@ if(isset($data->nim)){
     $post_id = $data->nim;
     
     //GET POST BY ID FROM DATABASE
-    $get_post = "SELECT * FROM `user_account` WHERE nim=:post_id";
+    $get_post = "SELECT * FROM `user_account` WHERE nim=:nim";
     $get_stmt = $conn->prepare($get_post);
     $get_stmt->bindValue(':post_id', $post_id,PDO::PARAM_STR);
     $get_stmt->execute();

@@ -32,11 +32,11 @@ if(isset($data->email)){
     //CHECK WHETHER THERE IS ANY POST IN OUR DATABASE
     if($get_stmt->rowCount() > 0){
         
-        $update_query = "UPDATE `user_account` SET password = :password WHERE emailuser = :email"; 
+        $update_query = "UPDATE `user_account` SET password = :password WHERE nim = :nim"; 
         $update_stmt = $conn->prepare($update_query);
         
         // DATA BINDING AND REMOVE SPECIAL CHARS AND REMOVE TAGS
-        $update_stmt->bindValue(':email', htmlspecialchars(strip_tags($data->email)),PDO::PARAM_STR);
+        $update_stmt->bindValue(':nim', htmlspecialchars(strip_tags($data->nim)),PDO::PARAM_STR);
         $update_stmt->bindValue(':password', htmlspecialchars(strip_tags($data->password)),PDO::PARAM_STR);
         
         if($update_stmt->execute()){

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 17, 2021 at 06:14 PM
+-- Generation Time: Apr 18, 2021 at 11:40 AM
 -- Server version: 10.4.18-MariaDB
 -- PHP Version: 7.3.27
 
@@ -40,10 +40,10 @@ CREATE TABLE `absensi` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jadwal kuliah`
+-- Table structure for table `jadwal_kuliah`
 --
 
-CREATE TABLE `jadwal kuliah` (
+CREATE TABLE `jadwal_kuliah` (
   `id_matakuliah` varchar(50) NOT NULL,
   `nama_matakuliah` varchar(50) NOT NULL,
   `id_jadwalkuliah` varchar(50) NOT NULL,
@@ -86,41 +86,50 @@ CREATE TABLE `presensi` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `user account`
+-- Table structure for table `user_account`
 --
 
-CREATE TABLE `user account` (
-  `id mahasiswa` int(11) NOT NULL,
+CREATE TABLE `user_account` (
+  `id` int(11) NOT NULL,
   `nim` varchar(50) NOT NULL,
-  `nama_mahasiswa` varchar(50) NOT NULL,
+  `nama` varchar(50) NOT NULL,
   `kelas` varchar(50) NOT NULL,
   `jurusan` varchar(50) NOT NULL,
   `alamat` varchar(50) NOT NULL,
-  `nomor_telp` varchar(50) NOT NULL,
-  `tahun_angkatan` varchar(50) NOT NULL,
+  `notelp` varchar(50) NOT NULL,
+  `angkatan` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `user_account`
+--
+
+INSERT INTO `user_account` (`id`, `nim`, `nama`, `kelas`, `jurusan`, `alamat`, `notelp`, `angkatan`, `password`, `email`) VALUES
+(1, '3311911012', 'kevin', 'IFA', 'TI', 'bengkong', '08080808080', '2019', 'kevin', 'kepinxr2@gmail.com'),
+(2, '33119', 'farel', 'farel', 'farel', 'farel', 'farel', 'farel', 'farel', 'farel'),
+(3, '3311911012', 'kevin kusuma wicaksono', 'IFA', 'IF ', 'bengkong', '0000000', '2019', 'kevin', 'kepinxr2@gmail.com');
 
 --
 -- Indexes for dumped tables
 --
 
 --
--- Indexes for table `user account`
+-- Indexes for table `user_account`
 --
-ALTER TABLE `user account`
-  ADD PRIMARY KEY (`id mahasiswa`);
+ALTER TABLE `user_account`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT for table `user account`
+-- AUTO_INCREMENT for table `user_account`
 --
-ALTER TABLE `user account`
-  MODIFY `id mahasiswa` int(11) NOT NULL AUTO_INCREMENT;
+ALTER TABLE `user_account`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
