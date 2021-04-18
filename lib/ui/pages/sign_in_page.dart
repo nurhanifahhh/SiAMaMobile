@@ -99,7 +99,7 @@ class _SignInPageState extends State<SignInPage> {
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintStyle: whiteFontStyle3,
-                  hintText: 'Masukan  password'),
+                  hintText: 'Masukann  password'),
             ),
           ),
           Container(
