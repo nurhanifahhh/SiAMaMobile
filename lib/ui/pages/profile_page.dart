@@ -23,41 +23,40 @@ class _ProfilePageState extends State<ProfilePage> {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      width: 100,
-                      height: 100,
+                      width: 80,
+                      height: 80,
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                              image: AssetImage('assets/profil.png'))),
+                              image: AssetImage('assets/visi.png'))),
                     ),
                     Text(
-                      "Menjadi politeknik generasi baru yang bermutu adaptif inovatif dan bermitra erat dengan industri dan masyarakat untuk mendukung indonesia Maju dan Sejahtera 2045",
+                      "Menjadi politeknik generasi baru yang \nbermutu adaptif inovatif dan bermitra \nerat dengan industri dan masyarakat \nuntuk mendukung indonesia Maju \ndan Sejahtera 2045",
                       style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                      ),
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black),
                     ),
                   ],
                 ),
                 SizedBox(
-                  height: 15,
+                  height: 50,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
-                      width: 100,
-                      height: 100,
+                      width: 80,
+                      height: 80,
                       decoration: BoxDecoration(
                           image: DecorationImage(
-                              image: AssetImage('assets/profil.png'))),
+                              image: AssetImage('assets/misi.png'))),
                     ),
                     Text(
-                      "Menjadi politeknik generasi baru yang bermutu adaptif inovatif dan bermitra erat dengan industri dan masyarakat untuk mendukung indonesia Maju dan Sejahtera 2045",
+                      "Aktif dalam proses kreasi, penyebaran \ndan penerapan sains dan teknologi \nmelalui layanan pendidikan tinggi \nvokasi dan penelitian terapan yang \nbermutu, terbuka, relevan dan \nberkolaborasi erat dengan masyarakat \ndan industri dengan penerapan tata \nkelola institusi yang baik untuk \nkehidupan bangsa yang lebih baik",
                       style: TextStyle(
-                        fontSize: 16.0,
+                        fontSize: 15.0,
                         fontWeight: FontWeight.w600,
-                        color: Colors.white,
+                        color: Colors.black,
                       ),
                     ),
                   ],
@@ -121,6 +120,7 @@ class _ProfilePageState extends State<ProfilePage> {
         //     ),
         //   ],
         // ),
+
         );
   }
 }

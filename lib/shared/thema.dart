@@ -5,6 +5,7 @@ Color greenColor = "FFB622".toColor();
 Color newColor = "0C3B2E".toColor();
 Color yellowColor = "FFB622".toColor();
 Color whiteColor = "FFFFFF".toColor();
+Color blackColor = "000000".toColor();
 
 TextStyle greyFontStyle = GoogleFonts.dmSans().copyWith(color: whiteColor);
 TextStyle whiteFontStyle = GoogleFonts.dmSans().copyWith(color: whiteColor);
