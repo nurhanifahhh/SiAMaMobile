@@ -46,7 +46,7 @@ class _EditProfilePageState extends State<EditProfilePage> {
                 style: TextStyle(fontSize: 25, fontWeight: FontWeight.w500),
               ),
               SizedBox(
-                height: 15,
+                height: 20,
               ),
               Center(
                 child: Stack(
