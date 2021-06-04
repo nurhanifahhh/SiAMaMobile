@@ -31,7 +31,7 @@ $data = json_decode(file_get_contents("php://input"));
     $email = $data->email;
 
     //GET POST BY ID FROM DATABASE
-    $get_data = "SELECT * FROM `user_account` WHERE nim=:nim";
+    $get_data = "SELECT * FROM `user_account` WHERE email=:email";
     $get_stmt = $conn->prepare($get_data);
     $get_stmt->bindValue(':email', $email,PDO::PARAM_STR);
     $get_stmt->execute();

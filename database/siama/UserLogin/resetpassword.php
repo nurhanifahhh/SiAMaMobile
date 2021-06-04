@@ -23,20 +23,20 @@ if(isset($data->email)){
     $post_email = $data->email;
     
     //GET POST BY ID FROM DATABASE
-    $get_post = "SELECT * FROM `user_account` WHERE nim=:nim";
+    $get_post = "SELECT * FROM `user_account` WHERE email=:email";
     $get_stmt = $conn->prepare($get_post);
-    $get_stmt->bindValue(':post_nim', $post_nim,PDO::PARAM_STR);
+    $get_stmt->bindValue(':email', $post_email,PDO::PARAM_STR);
     $get_stmt->execute();
     
     
     //CHECK WHETHER THERE IS ANY POST IN OUR DATABASE
     if($get_stmt->rowCount() > 0){
         
-        $update_query = "UPDATE `user_account` SET password = :password WHERE nim = :nim"; 
+        $update_query = "UPDATE `user_account` SET password = :password WHERE email = :email"; 
         $update_stmt = $conn->prepare($update_query);
         
         // DATA BINDING AND REMOVE SPECIAL CHARS AND REMOVE TAGS
-        $update_stmt->bindValue(':nim', htmlspecialchars(strip_tags($data->nim)),PDO::PARAM_STR);
+        $update_stmt->bindValue(':email', htmlspecialchars(strip_tags($data->email)),PDO::PARAM_STR);
         $update_stmt->bindValue(':password', htmlspecialchars(strip_tags($data->password)),PDO::PARAM_STR);
         
         if($update_stmt->execute()){

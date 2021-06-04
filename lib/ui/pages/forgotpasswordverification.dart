@@ -31,9 +31,9 @@ class _ForgotPasswordVerificationScreenState
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             SizedBox(height: 20.0),
-            new Icon(Icons.lock, size: 180.0, color: mainColor),
+            new Icon(Icons.lock, size: 180.0, color: Color(0xffFFC700)),
             Text(
-                "Please Enter 6 Digit Verification Code Which is Sent to Your Email",
+                "Please Enter 6 Digit Verification Code \n Which is Sent to Your Email!",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 18)),
             Text(""),
@@ -66,7 +66,7 @@ class _ForgotPasswordVerificationScreenState
                   },
                   child: Text(
                     "Confirm",
-                    style: TextStyle(color: Colors.black, fontSize: 18.0),
+                    style: TextStyle(color: Colors.white, fontSize: 18.0),
                   ),
                 )),
           ],
