@@ -291,11 +291,50 @@ class _ProfilPageState extends State<ProfilPage> {
                   borderRadius: BorderRadius.circular(8)),
               color: mainColor,
               child: Text(
+                'Change Profile',
+                style: whiteFontStyle,
+              ),
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            margin: EdgeInsets.only(top: 24),
+            height: 45,
+            padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+            child: RaisedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/home_page');
+              },
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8)),
+              color: mainColor,
+              child: Text(
+                'Change Password',
+                style: whiteFontStyle,
+              ),
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            margin: EdgeInsets.only(top: 24),
+            height: 45,
+            padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+            child: RaisedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/home_page');
+              },
+              elevation: 0,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8)),
+              color: mainColor,
+              child: Text(
                 'Back To Home',
                 style: whiteFontStyle,
               ),
             ),
           ),
+          SizedBox(height: 5),
         ],
       ),
     );

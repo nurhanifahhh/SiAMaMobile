@@ -110,7 +110,7 @@ class _SignInPageState extends State<SignInPage> {
                 ? SpinKitFadingCircle(size: 45, color: Colors.black)
                 : RaisedButton(
                     onPressed: () {
-                      Navigator.pushNamed(context, '/forgot_page');
+                      Navigator.pushNamed(context, '/forgotpassword');
                     },
                     elevation: 0,
                     shape: RoundedRectangleBorder(
