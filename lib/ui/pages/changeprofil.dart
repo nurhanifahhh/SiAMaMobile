@@ -1,14 +1,14 @@
 part of 'pages.dart';
 
-class ResetPassword extends StatefulWidget {
+class Changeprofil extends StatefulWidget {
   final VerificationCodeModel verificationEmail;
-  const ResetPassword({Key key, this.verificationEmail}) : super(key: key);
+  const Changeprofil({Key key, this.verificationEmail}) : super(key: key);
 
   @override
-  _ResetPasswordState createState() => _ResetPasswordState();
+  _ChangeprofilState createState() => _ChangeprofilState();
 }
 
-class _ResetPasswordState extends State<ResetPassword> {
+class _ChangeprofilState extends State<Changeprofil> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController passwordController = new TextEditingController();
   TextEditingController rePasswordController = new TextEditingController();
@@ -18,8 +18,8 @@ class _ResetPasswordState extends State<ResetPassword> {
   @override
   Widget build(BuildContext context) {
     return GeneralPage(
-      title: 'Change Password',
-      subtitle: "Don't forgot your new password",
+      title: 'Change Profile',
+      subtitle: "Edit your profile",
       onBackButtonPressed: () {
         Navigator.pushNamed(context, '/home_page');
       },
@@ -42,7 +42,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   borderSide: BorderSide(color: mainColor, width: 2),
                 ),
-                hintText: "Your old password",
+                hintText: "Your new email",
                 prefixIcon: Icon(Icons.lock, color: Colors.black),
               ),
             ),
@@ -59,7 +59,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   borderSide: BorderSide(color: mainColor, width: 2),
                 ),
-                hintText: "Type new password",
+                hintText: "Your new address",
                 prefixIcon: Icon(Icons.lock, color: Colors.black),
               ),
             ),
@@ -76,7 +76,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   borderSide: BorderSide(color: mainColor, width: 2),
                 ),
-                hintText: "Retype new password",
+                hintText: "Your new number phone",
                 prefixIcon: Icon(Icons.lock, color: Colors.black),
               ),
             ),
@@ -94,7 +94,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                     resetPassword();
                   },
                   child: Text(
-                    "Change Password",
+                    "Change Profile",
                     style: TextStyle(color: whiteColor, fontSize: 18.0),
                   ),
                 )),

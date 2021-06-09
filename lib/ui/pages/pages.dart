@@ -23,6 +23,7 @@ part 'forgotpasswordverification.dart';
 part 'resetpassword.dart';
 part 'changepassword.dart';
 part 'profileuser.dart';
+part 'changeprofil.dart';
 part 'package:siamauji1/models/userloginmodel.dart';
 part 'package:siamauji1/models/constanta.dart';
 part 'package:siamauji1/service/userloginservices.dart';

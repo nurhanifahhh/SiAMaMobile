@@ -284,7 +284,7 @@ class _ProfilPageState extends State<ProfilPage> {
             padding: EdgeInsets.symmetric(horizontal: defaultMargin),
             child: RaisedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/home_page');
+                Navigator.pushNamed(context, '/changeprofil');
               },
               elevation: 0,
               shape: RoundedRectangleBorder(
@@ -303,7 +303,7 @@ class _ProfilPageState extends State<ProfilPage> {
             padding: EdgeInsets.symmetric(horizontal: defaultMargin),
             child: RaisedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/home_page');
+                Navigator.pushNamed(context, '/changepassword');
               },
               elevation: 0,
               shape: RoundedRectangleBorder(
