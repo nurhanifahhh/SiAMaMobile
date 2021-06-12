@@ -12,13 +12,13 @@ class ResetPassword extends StatefulWidget {
 class _ResetPasswordState extends State<ResetPassword> {
   UserLoginModel userLoginModel = new UserLoginModel();
 
-  TextEditingController txtpassword = new TextEditingController();
+  TextEditingController txtoldpassword = new TextEditingController();
   TextEditingController txtnewpassword = new TextEditingController();
   TextEditingController txtrenewpassword = new TextEditingController();
 
   @override
   void initState() {
-    txtpassword.text = widget.userLoginModel.password;
+    txtoldpassword.text = widget.userLoginModel.password;
     txtnewpassword.text = widget.userLoginModel.password;
     txtrenewpassword.text = widget.userLoginModel.password;
 
@@ -46,7 +46,7 @@ class _ResetPasswordState extends State<ResetPassword> {
           children: <Widget>[
             SizedBox(height: 15.0),
             TextFormField(
-              controller: txtpassword,
+              controller: txtoldpassword,
               //validator: _validateEmail,
               decoration: InputDecoration(
                 border: InputBorder.none,
@@ -56,7 +56,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   borderSide: BorderSide(color: mainColor, width: 2),
                 ),
-                hintText: userLoginModel.password,
+                hintText: "type Your Old Password",
                 prefixIcon: Icon(Icons.lock, color: Colors.black),
               ),
             ),
@@ -72,7 +72,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   borderSide: BorderSide(color: mainColor, width: 2),
                 ),
-                hintText: userLoginModel.password,
+                hintText: "type New Password",
                 prefixIcon: Icon(Icons.lock, color: Colors.black),
               ),
             ),
@@ -88,7 +88,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   borderSide: BorderSide(color: mainColor, width: 2),
                 ),
-                hintText: userLoginModel.password,
+                hintText: "Re-type New Password",
                 prefixIcon: Icon(Icons.lock, color: Colors.black),
               ),
             ),
@@ -117,33 +117,35 @@ class _ResetPasswordState extends State<ResetPassword> {
   }
 
   void updatePassword() {
-    setState(() {
-      isLoading = true;
-    });
+    bool isValid = true;
+    txtoldpassword.text == widget.userLoginModel.password &&
+            txtnewpassword.text == txtrenewpassword.text
+        ? isValid = true
+        : isValid = false;
+    print(widget.userLoginModel.password);
 
-    UserLoginModel userLoginModel = new UserLoginModel(
-        id: widget.userLoginModel.id,
-        nama: txtpassword.text,
-        alamat: txtnewpassword.text,
-        notelp: txtrenewpassword.text);
-
-    var requestBody = jsonEncode(userLoginModel.toJson());
-    UserLoginServices.updateData(requestBody).then((value) {
-      //Decode response
-      final result = value;
-      //check status
-      if (result.success == true && result.code == 200) {
-        _successDialog();
-      } else {
-        _failedDialog();
-      }
+    if (isValid) {
       setState(() {
-        isLoading = false;
+        isLoading = true;
       });
-    }).catchError((error) {
-      String err = error.toString();
-      print(err);
-    });
+      //update password
+      UserLoginModel userLoginModel = new UserLoginModel(
+          id: widget.userLoginModel.id, password: txtnewpassword.text);
+
+      var requestBody = jsonEncode(userLoginModel.toJson());
+      UserLoginServices.updateData(requestBody).then((value) {
+        final result = value;
+        if (result.success == true && result.code == 200) {
+          _successDialog();
+          isLoading = false;
+        } else {}
+      }).catchError((error) {
+        //String err = error.toString();
+      });
+      print(requestBody);
+    } else {
+      _failedDialog();
+    }
   }
 
   Future<void> _successDialog() async {
@@ -152,11 +154,11 @@ class _ResetPasswordState extends State<ResetPassword> {
         barrierDismissible: false, // user must tap button
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Update Password Success"),
+            title: Text("Change Password Success"),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  Text("Your Password is Updated!"),
+                  Text("Your Password is Change!"),
                 ],
               ),
             ),
@@ -181,7 +183,7 @@ class _ResetPasswordState extends State<ResetPassword> {
         barrierDismissible: false, // user must tap button
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Update Password Failed"),
+            title: Text("Change Password Failed"),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
