@@ -1,21 +1,36 @@
 part of 'pages.dart';
 
 class Changeprofil extends StatefulWidget {
-  final VerificationCodeModel verificationEmail;
-  const Changeprofil({Key key, this.verificationEmail}) : super(key: key);
+  final UserLoginModel userLoginModel;
+
+  const Changeprofil({Key key, this.userLoginModel}) : super(key: key);
 
   @override
   _ChangeprofilState createState() => _ChangeprofilState();
 }
 
 class _ChangeprofilState extends State<Changeprofil> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  TextEditingController passwordController = new TextEditingController();
-  TextEditingController rePasswordController = new TextEditingController();
+  UserLoginModel userLoginModel = new UserLoginModel();
 
-  bool isChangePassword = false;
+  TextEditingController txtnama = new TextEditingController();
+  TextEditingController txtalamat = new TextEditingController();
+  TextEditingController txtnotelp = new TextEditingController();
 
   @override
+  void initState() {
+    txtnama.text = widget.userLoginModel.nama;
+    txtalamat.text = widget.userLoginModel.alamat;
+    txtnotelp.text = widget.userLoginModel.notelp;
+
+    super.initState();
+  }
+
+  @override
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  bool isLoading = false;
+  String userId = "0";
+
   Widget build(BuildContext context) {
     return GeneralPage(
       title: 'Change Profile',
@@ -31,8 +46,7 @@ class _ChangeprofilState extends State<Changeprofil> {
           children: <Widget>[
             SizedBox(height: 15.0),
             TextFormField(
-              controller: passwordController,
-              obscureText: true,
+              controller: txtnama,
               //validator: _validateEmail,
               decoration: InputDecoration(
                 border: InputBorder.none,
@@ -42,14 +56,13 @@ class _ChangeprofilState extends State<Changeprofil> {
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   borderSide: BorderSide(color: mainColor, width: 2),
                 ),
-                hintText: "Your new email",
+                hintText: userLoginModel.nama,
                 prefixIcon: Icon(Icons.lock, color: Colors.black),
               ),
             ),
             Text(""),
             TextFormField(
-              controller: passwordController,
-              obscureText: true,
+              controller: txtalamat,
               //validator: _validateEmail,
               decoration: InputDecoration(
                 border: InputBorder.none,
@@ -59,14 +72,13 @@ class _ChangeprofilState extends State<Changeprofil> {
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   borderSide: BorderSide(color: mainColor, width: 2),
                 ),
-                hintText: "Your new address",
+                hintText: userLoginModel.alamat,
                 prefixIcon: Icon(Icons.lock, color: Colors.black),
               ),
             ),
             Text(""),
             TextFormField(
-              controller: rePasswordController,
-              obscureText: true,
+              controller: txtnotelp,
               //validator: _validateEmail,
               decoration: InputDecoration(
                 border: InputBorder.none,
@@ -76,7 +88,7 @@ class _ChangeprofilState extends State<Changeprofil> {
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   borderSide: BorderSide(color: mainColor, width: 2),
                 ),
-                hintText: "Your new number phone",
+                hintText: userLoginModel.notelp,
                 prefixIcon: Icon(Icons.lock, color: Colors.black),
               ),
             ),
@@ -91,7 +103,7 @@ class _ChangeprofilState extends State<Changeprofil> {
                 ),
                 child: RaisedButton(
                   onPressed: () {
-                    resetPassword();
+                    updateProfile();
                   },
                   child: Text(
                     "Change Profile",
@@ -104,48 +116,48 @@ class _ChangeprofilState extends State<Changeprofil> {
     );
   }
 
-  void resetPassword() {
-    String emailAddress;
-    emailAddress = widget.verificationEmail.email.toString();
-    Map map = {"email": emailAddress, "password": rePasswordController.text};
-    var requestBody = jsonEncode(map);
-    UserLoginServices.changePassword(requestBody).then((value) {
-      final result = value;
-      if (result.success == true && result.code == 200) {
-        _showSuccess();
-      } else {
-        //_showError();
-        _handledVerifError(
-            "Failed to Send Verification Code, message: " + result.message);
-      }
-    }).catchError((error) {
-      _handledVerifError(
-          "Failed to Send Verification Code, message: " + error.toString());
-    });
-    print(requestBody);
-  }
-
-  void _handledVerifError(String errorMessage) {
-    //Dialog.showAlertMessage(errorMessage, context);
-    print(errorMessage);
-    if (!mounted) return;
+  void updateProfile() {
     setState(() {
-      isChangePassword = false;
+      isLoading = true;
+    });
+
+    UserLoginModel userLoginModel = new UserLoginModel(
+        id: widget.userLoginModel.id,
+        nama: txtnama.text,
+        alamat: txtalamat.text,
+        notelp: txtnotelp.text
+        );
+
+    var requestBody = jsonEncode(userLoginModel.toJson());
+    UserLoginServices.updateData(requestBody).then((value) {
+      //Decode response
+      final result = value;
+      //check status
+      if (result.success == true && result.code == 200) {
+        _successDialog();
+      } else {
+        _failedDialog();
+      }
+      setState(() {
+        isLoading = false;
+      });
+    }).catchError((error) {
+      String err = error.toString();
+      print(err);
     });
   }
 
-  Future<void> _showSuccess() async {
+  Future<void> _successDialog() async {
     return showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Password is Changed"),
+            title: Text("Update Success"),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  Text("Make sure your account is successfully recover"),
-                  Text("Please login using your new password"),
+                  Text("Your Profile is Updated!"),
                 ],
               ),
             ),
@@ -155,8 +167,35 @@ class _ChangeprofilState extends State<Changeprofil> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SignInPage()),
+                    MaterialPageRoute(builder: (context) => ProfilPage()),
                   );
+                },
+              ),
+            ],
+          );
+        });
+  }
+
+  Future<void> _failedDialog() async {
+    return showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Update Failed"),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  Text("Oops, something went wrong"),
+                  Text("Please check all the possible mistakes"),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
                 },
               ),
             ],

@@ -1,38 +1,62 @@
+part of '../ui/pages/pages.dart';
 // To parse this JSON data, do
 //
-//     final userloginmodel = userloginmodelFromJson(jsonString);
+//     final userModel = userModelFromJson(jsonString);
 
-import 'dart:convert';
+List userModelFromJson(String str) =>
+    List.from(json.decode(str).map((x) => UserModel.fromJson(x)));
 
-Usermodel userloginmodelFromJson(String str) =>
-    Usermodel.fromJson(json.decode(str));
+String userModelToJson(List data) =>
+    json.encode(List.from(data.map((x) => x.toJson())));
 
-String userloginmodelToJson(Usermodel data) => json.encode(data.toJson());
+class UserModel {
+  int id;
+  String nim;
+  String nama;
+  String kelas;
+  String jurusan;
+  String alamat;
+  String notelp;
+  String angkatan;
+  String password;
+  String email;
 
-class Usermodel {
-  Usermodel({
-    this.idUser,
-    this.name,
-    this.email,
+  UserModel({
+    this.id,
+    this.nim,
+    this.nama,
+    this.kelas,
+    this.jurusan,
+    this.alamat,
+    this.notelp,
+    this.angkatan,
     this.password,
+    this.email,
   });
 
-  int idUser;
-  String name;
-  String email;
-  String password;
-
-  factory Usermodel.fromJson(Map<String, dynamic> json) => Usermodel(
-        idUser: json["id_user"],
-        name: json["name"],
-        email: json["email"],
+  factory UserModel.fromJson(Map json) => UserModel(
+        id: json["id"],
+        nim: json["nim"],
+        nama: json["nama"],
+        kelas: json["kelas"],
+        jurusan: json["jurusan"],
+        alamat: json["alamat"],
+        notelp: json["notelp"],
+        angkatan: json["angkatan"],
         password: json["password"],
+        email: json["email"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "id_user": idUser,
-        "name": name,
-        "email": email,
+  Map toJson() => {
+        "id": id,
+        "nim": nim,
+        "nama": nama,
+        "kelas": kelas,
+        "jurusan": jurusan,
+        "alamat": alamat,
+        "notelp": notelp,
+        "angkatan": angkatan,
         "password": password,
+        "email": email,
       };
 }

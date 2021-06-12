@@ -84,7 +84,7 @@ class _ForgotPasswordVerificationScreenState
           context,
           MaterialPageRoute(
               builder: (context) =>
-                  ResetPassword(verificationEmail: _verificationEmail)));
+                  ResetPasswordScreen(verificationEmail: _verificationEmail)));
     } else {
       print("Your Verification Code is Invalid");
     }

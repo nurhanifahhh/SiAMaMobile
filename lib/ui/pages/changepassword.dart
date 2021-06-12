@@ -1,21 +1,36 @@
 part of 'pages.dart';
 
 class ResetPassword extends StatefulWidget {
-  final VerificationCodeModel verificationEmail;
-  const ResetPassword({Key key, this.verificationEmail}) : super(key: key);
+  final UserLoginModel userLoginModel;
+
+  const ResetPassword({Key key, this.userLoginModel}) : super(key: key);
 
   @override
   _ResetPasswordState createState() => _ResetPasswordState();
 }
 
 class _ResetPasswordState extends State<ResetPassword> {
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-  TextEditingController passwordController = new TextEditingController();
-  TextEditingController rePasswordController = new TextEditingController();
+  UserLoginModel userLoginModel = new UserLoginModel();
 
-  bool isChangePassword = false;
+  TextEditingController txtpassword = new TextEditingController();
+  TextEditingController txtnewpassword = new TextEditingController();
+  TextEditingController txtrenewpassword = new TextEditingController();
 
   @override
+  void initState() {
+    txtpassword.text = widget.userLoginModel.password;
+    txtnewpassword.text = widget.userLoginModel.password;
+    txtrenewpassword.text = widget.userLoginModel.password;
+
+    super.initState();
+  }
+
+  @override
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  bool isLoading = false;
+  String userId = "0";
+
   Widget build(BuildContext context) {
     return GeneralPage(
       title: 'Change Password',
@@ -31,8 +46,7 @@ class _ResetPasswordState extends State<ResetPassword> {
           children: <Widget>[
             SizedBox(height: 15.0),
             TextFormField(
-              controller: passwordController,
-              obscureText: true,
+              controller: txtpassword,
               //validator: _validateEmail,
               decoration: InputDecoration(
                 border: InputBorder.none,
@@ -42,14 +56,13 @@ class _ResetPasswordState extends State<ResetPassword> {
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   borderSide: BorderSide(color: mainColor, width: 2),
                 ),
-                hintText: "Your old password",
+                hintText: userLoginModel.password,
                 prefixIcon: Icon(Icons.lock, color: Colors.black),
               ),
             ),
             Text(""),
             TextFormField(
-              controller: passwordController,
-              obscureText: true,
+              controller: txtnewpassword,
               //validator: _validateEmail,
               decoration: InputDecoration(
                 border: InputBorder.none,
@@ -59,14 +72,13 @@ class _ResetPasswordState extends State<ResetPassword> {
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   borderSide: BorderSide(color: mainColor, width: 2),
                 ),
-                hintText: "Type new password",
+                hintText: userLoginModel.password,
                 prefixIcon: Icon(Icons.lock, color: Colors.black),
               ),
             ),
             Text(""),
             TextFormField(
-              controller: rePasswordController,
-              obscureText: true,
+              controller: txtrenewpassword,
               //validator: _validateEmail,
               decoration: InputDecoration(
                 border: InputBorder.none,
@@ -76,7 +88,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                   borderRadius: BorderRadius.all(Radius.circular(10.0)),
                   borderSide: BorderSide(color: mainColor, width: 2),
                 ),
-                hintText: "Retype new password",
+                hintText: userLoginModel.password,
                 prefixIcon: Icon(Icons.lock, color: Colors.black),
               ),
             ),
@@ -91,7 +103,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                 ),
                 child: RaisedButton(
                   onPressed: () {
-                    resetPassword();
+                    updatePassword();
                   },
                   child: Text(
                     "Change Password",
@@ -104,48 +116,47 @@ class _ResetPasswordState extends State<ResetPassword> {
     );
   }
 
-  void resetPassword() {
-    String emailAddress;
-    emailAddress = widget.verificationEmail.email.toString();
-    Map map = {"email": emailAddress, "password": rePasswordController.text};
-    var requestBody = jsonEncode(map);
-    UserLoginServices.changePassword(requestBody).then((value) {
-      final result = value;
-      if (result.success == true && result.code == 200) {
-        _showSuccess();
-      } else {
-        //_showError();
-        _handledVerifError(
-            "Failed to Send Verification Code, message: " + result.message);
-      }
-    }).catchError((error) {
-      _handledVerifError(
-          "Failed to Send Verification Code, message: " + error.toString());
-    });
-    print(requestBody);
-  }
-
-  void _handledVerifError(String errorMessage) {
-    //Dialog.showAlertMessage(errorMessage, context);
-    print(errorMessage);
-    if (!mounted) return;
+  void updatePassword() {
     setState(() {
-      isChangePassword = false;
+      isLoading = true;
+    });
+
+    UserLoginModel userLoginModel = new UserLoginModel(
+        id: widget.userLoginModel.id,
+        nama: txtpassword.text,
+        alamat: txtnewpassword.text,
+        notelp: txtrenewpassword.text);
+
+    var requestBody = jsonEncode(userLoginModel.toJson());
+    UserLoginServices.updateData(requestBody).then((value) {
+      //Decode response
+      final result = value;
+      //check status
+      if (result.success == true && result.code == 200) {
+        _successDialog();
+      } else {
+        _failedDialog();
+      }
+      setState(() {
+        isLoading = false;
+      });
+    }).catchError((error) {
+      String err = error.toString();
+      print(err);
     });
   }
 
-  Future<void> _showSuccess() async {
+  Future<void> _successDialog() async {
     return showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Password is Changed"),
+            title: Text("Update Password Success"),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  Text("Make sure your account is successfully recover"),
-                  Text("Please login using your new password"),
+                  Text("Your Password is Updated!"),
                 ],
               ),
             ),
@@ -155,8 +166,35 @@ class _ResetPasswordState extends State<ResetPassword> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SignInPage()),
+                    MaterialPageRoute(builder: (context) => ProfilPage()),
                   );
+                },
+              ),
+            ],
+          );
+        });
+  }
+
+  Future<void> _failedDialog() async {
+    return showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Update Password Failed"),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  Text("Oops, something went wrong"),
+                  Text("Please check all the possible mistakes"),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
                 },
               ),
             ],

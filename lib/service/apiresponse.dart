@@ -1,7 +1,9 @@
 part of '../ui/pages/pages.dart';
 
-ApiResponse apiResponseFromJson(String str) =>
-    ApiResponse.fromJson(json.decode(str));
+ApiResponse apiResponseFromJson(String str) {
+  var apiResponse = ApiResponse.fromJson(json.decode(str));
+  return apiResponse;
+}
 
 String apiResponseToJson(ApiResponse data) => json.encode(data.toJson());
 

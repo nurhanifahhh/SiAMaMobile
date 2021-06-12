@@ -8,9 +8,13 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  TextEditingController emailController = TextEditingController();
+  TextEditingController nimController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isLoading = false;
+  String uid;
+
+  UserLoginModel userLoginModel = new UserLoginModel();
+  ApiResponse apiResponse;
 
   @override
   void initState() {
@@ -19,22 +23,31 @@ class _SignInPageState extends State<SignInPage> {
 
   void authentication() {
     UserLoginModel userLoginModel = new UserLoginModel(
-        nim: emailController.text, password: passwordController.text);
+        nim: nimController.text, password: passwordController.text);
 
     var requestBody = jsonEncode(userLoginModel.toJson());
     print(requestBody);
     UserLoginServices.authentication(requestBody).then((value) {
       final result = value;
       if (result.success == true && result.code == 200) {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => HomePage()),
-        );
+        userLoginModel = UserLoginModel.fromJson(result.content);
+        uid = userLoginModel.id.toString();
+        print(uid);
+
+        _storeUserData();
       } else {
-        print(requestBody);
+        //print(requestBody);
       }
     }).catchError((error) {});
-    print(requestBody);
+  }
+
+  void _storeUserData() async {
+    final storage = FlutterSecureStorage();
+    await storage.write(key: Constanta.keyUserId, value: uid);
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => ProfilPage()),
+    );
   }
 
   @override
@@ -71,7 +84,7 @@ class _SignInPageState extends State<SignInPage> {
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: "0C3B2E".toColor())),
             child: TextField(
-              controller: emailController,
+              controller: nimController,
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintStyle: whiteFontStyle3,

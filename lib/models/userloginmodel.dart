@@ -22,7 +22,7 @@ class UserLoginModel {
     this.email,
   });
 
-  int id;
+  String id;
   String nim;
   String nama;
   String kelas;

@@ -6,6 +6,16 @@ class ProfilPage extends StatefulWidget {
 }
 
 class _ProfilPageState extends State<ProfilPage> {
+  UserLoginModel userLoginModel = new UserLoginModel();
+  String userId = "0";
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    readUserData();
+    super.initState();
+  }
+
   TextEditingController nimController = TextEditingController();
   TextEditingController namaController = TextEditingController();
   TextEditingController kelasController = TextEditingController();
@@ -74,29 +84,6 @@ class _ProfilPageState extends State<ProfilPage> {
             width: double.infinity,
             margin: EdgeInsets.fromLTRB(defaultMargin, 16, defaultMargin, 6),
             child: Text(
-              "Full Name",
-              style: whiteFontStyle2,
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: "FFC700".toColor())),
-            child: TextField(
-              controller: namaController,
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintStyle: whiteFontStyle3,
-                  hintText: 'Type your name here'),
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.fromLTRB(defaultMargin, 16, defaultMargin, 6),
-            child: Text(
               "NIM",
               style: whiteFontStyle2,
             ),
@@ -105,91 +92,18 @@ class _ProfilPageState extends State<ProfilPage> {
             width: double.infinity,
             margin: EdgeInsets.symmetric(horizontal: defaultMargin),
             padding: EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: "FFC700".toColor())),
             child: TextField(
               controller: nimController,
+              readOnly: true,
               decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintStyle: whiteFontStyle3,
-                  hintText: 'Type your NIM'),
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.fromLTRB(defaultMargin, 26, defaultMargin, 6),
-            child: Text(
-              "Email Address",
-              style: whiteFontStyle2,
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: "FFC700".toColor())),
-            child: TextField(
-              controller: emailController,
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintStyle: whiteFontStyle3,
-                  hintText: 'Type your email'),
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.fromLTRB(defaultMargin, 26, defaultMargin, 6),
-            child: Text(
-              "Address",
-              style: whiteFontStyle2,
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: "FFC700".toColor())),
-            child: TextField(
-              controller: alamatController,
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintStyle: whiteFontStyle3,
-                  hintText: 'Type your address'),
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.fromLTRB(defaultMargin, 26, defaultMargin, 6),
-            child: Text(
-              "Phone Number",
-              style: whiteFontStyle2,
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: "FFC700".toColor())),
-            child: TextField(
-              controller: notelpController,
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintStyle: whiteFontStyle3,
-                  hintText: 'Type your phone number'),
+                  border: InputBorder.none, hintText: userLoginModel.nim),
             ),
           ),
           Container(
             width: double.infinity,
             margin: EdgeInsets.fromLTRB(defaultMargin, 16, defaultMargin, 6),
             child: Text(
-              "Password",
+              "Nama",
               style: whiteFontStyle2,
             ),
           ),
@@ -197,22 +111,18 @@ class _ProfilPageState extends State<ProfilPage> {
             width: double.infinity,
             margin: EdgeInsets.symmetric(horizontal: defaultMargin),
             padding: EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: "FFC700".toColor())),
             child: TextField(
-              controller: passwordController,
+              controller: namaController,
+              readOnly: true,
               decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintStyle: whiteFontStyle3,
-                  hintText: 'Type your password'),
+                  border: InputBorder.none, hintText: userLoginModel.nama),
             ),
           ),
           Container(
             width: double.infinity,
             margin: EdgeInsets.fromLTRB(defaultMargin, 16, defaultMargin, 6),
             child: Text(
-              "Type your year generation",
+              "Kelas",
               style: whiteFontStyle2,
             ),
           ),
@@ -220,45 +130,18 @@ class _ProfilPageState extends State<ProfilPage> {
             width: double.infinity,
             margin: EdgeInsets.symmetric(horizontal: defaultMargin),
             padding: EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: "FFC700".toColor())),
-            child: TextField(
-              controller: angkatanController,
-              decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintStyle: whiteFontStyle3,
-                  hintText: 'Type your year generation'),
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.fromLTRB(defaultMargin, 16, defaultMargin, 6),
-            child: Text(
-              "Type your class",
-              style: whiteFontStyle2,
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: "FFC700".toColor())),
             child: TextField(
               controller: kelasController,
+              readOnly: true,
               decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintStyle: whiteFontStyle3,
-                  hintText: 'Type your class'),
+                  border: InputBorder.none, hintText: userLoginModel.kelas),
             ),
           ),
           Container(
             width: double.infinity,
             margin: EdgeInsets.fromLTRB(defaultMargin, 16, defaultMargin, 6),
             child: Text(
-              "Type your college major",
+              "Jurusan",
               style: whiteFontStyle2,
             ),
           ),
@@ -266,15 +149,87 @@ class _ProfilPageState extends State<ProfilPage> {
             width: double.infinity,
             margin: EdgeInsets.symmetric(horizontal: defaultMargin),
             padding: EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: "FFC700".toColor())),
             child: TextField(
               controller: jurusanController,
+              readOnly: true,
               decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintStyle: whiteFontStyle3,
-                  hintText: 'Type your college major'),
+                  border: InputBorder.none, hintText: userLoginModel.jurusan),
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            margin: EdgeInsets.fromLTRB(defaultMargin, 16, defaultMargin, 6),
+            child: Text(
+              "Alamat",
+              style: whiteFontStyle2,
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: TextField(
+              controller: alamatController,
+              readOnly: true,
+              decoration: InputDecoration(
+                  border: InputBorder.none, hintText: userLoginModel.alamat),
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            margin: EdgeInsets.fromLTRB(defaultMargin, 16, defaultMargin, 6),
+            child: Text(
+              "Nomor Telepon",
+              style: whiteFontStyle2,
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: TextField(
+              controller: notelpController,
+              readOnly: true,
+              decoration: InputDecoration(
+                  border: InputBorder.none, hintText: userLoginModel.notelp),
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            margin: EdgeInsets.fromLTRB(defaultMargin, 16, defaultMargin, 6),
+            child: Text(
+              "Angkatan",
+              style: whiteFontStyle2,
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: TextField(
+              controller: angkatanController,
+              readOnly: true,
+              decoration: InputDecoration(
+                  border: InputBorder.none, hintText: userLoginModel.angkatan),
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            margin: EdgeInsets.fromLTRB(defaultMargin, 16, defaultMargin, 6),
+            child: Text(
+              "Email",
+              style: whiteFontStyle2,
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            child: TextField(
+              controller: emailController,
+              readOnly: true,
+              decoration: InputDecoration(
+                  border: InputBorder.none, hintText: userLoginModel.email),
             ),
           ),
           Container(
@@ -284,7 +239,11 @@ class _ProfilPageState extends State<ProfilPage> {
             padding: EdgeInsets.symmetric(horizontal: defaultMargin),
             child: RaisedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/changeprofil');
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            Changeprofil(userLoginModel: userLoginModel)));
               },
               elevation: 0,
               shape: RoundedRectangleBorder(
@@ -303,7 +262,11 @@ class _ProfilPageState extends State<ProfilPage> {
             padding: EdgeInsets.symmetric(horizontal: defaultMargin),
             child: RaisedButton(
               onPressed: () {
-                Navigator.pushNamed(context, '/changepassword');
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            ResetPassword(userLoginModel: userLoginModel)));
               },
               elevation: 0,
               shape: RoundedRectangleBorder(
@@ -338,5 +301,34 @@ class _ProfilPageState extends State<ProfilPage> {
         ],
       ),
     );
+  }
+
+  void readUserData() async {
+    final storage = FlutterSecureStorage();
+    userId = await storage.read(key: Constanta.keyUserId);
+    getDataUserLogin();
+  }
+
+  void getDataUserLogin() {
+    setState(() {
+      isLoading = true;
+    });
+    Map map = {
+      "id": userId,
+    };
+    var requestBody = jsonEncode(map);
+    UserLoginServices.getUserLogin(requestBody).then((value) {
+      //Decode response
+      final result = value;
+      //check status
+      if (result.success == true && result.code == 200) {
+        //parse model and return value
+        userLoginModel = UserLoginModel.fromJson(result.content);
+        setState(() {
+          isLoading = false;
+        });
+      } else {}
+    });
+    //print(userLoginModel.id);
   }
 }
