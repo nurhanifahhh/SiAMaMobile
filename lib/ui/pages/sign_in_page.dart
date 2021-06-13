@@ -35,8 +35,8 @@ class _SignInPageState extends State<SignInPage> {
         print(uid);
 
         _storeUserData();
-        nimController.text="";
-        passwordController.text="";
+        nimController.text = "";
+        passwordController.text = "";
         _successDialog();
       } else {
         _showDialog();
@@ -108,10 +108,7 @@ class _SignInPageState extends State<SignInPage> {
     UserLoginServices.getUserLogin(requestBody).then((value) {
       final result = value;
       if (result.success == true && result.code == 200) {
-
-      } else {
-
-      }
+      } else {}
     }).catchError((error) {
       String err = error.toString();
     });
