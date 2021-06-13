@@ -42,7 +42,8 @@ class _ScreenPageState extends State<ScreenPage> {
             gradient: LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
-                colors: [Color(0xFF1B5E20), Color(0xFF1B5E20)])),
+                // coloras: [Color(0xFF1B5E20), Color(0xFF1B5E20)]
+                )),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.center,
