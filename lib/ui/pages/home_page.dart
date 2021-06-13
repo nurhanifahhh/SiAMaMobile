@@ -37,6 +37,7 @@ class _HomePageState extends State<HomePage> {
             Center(
               child: ProfilePage(),
             ),
+<<<<<<< HEAD
           ],
         )),
         Align(
@@ -50,6 +51,36 @@ class _HomePageState extends State<HomePage> {
               pageController.jumpToPage(selectedPage);
             },
           ),
+=======
+          )
+        ],
+      ),
+    );
+  }
+
+  GestureDetector buildNavBarItem(IconData icon, int index) {
+    return GestureDetector(
+      onTap: () {
+        setState(() {
+          _selectedItemIndex = index;
+        });
+      },
+      child: Container(
+        width: MediaQuery.of(context).size.width / 5,
+        height: 60,
+        decoration: index == _selectedItemIndex
+            ? BoxDecoration(
+                border:
+                    Border(bottom: BorderSide(width: 4, color: Colors.green)),
+                gradient: LinearGradient(Colors: whiteColor [
+                  Colors.green.withOpacity(0.3),
+                  Colors.green.withOpacity(0.016),
+                ], begin: Alignment.bottomCenter, end: Alignment.topCenter))
+            : BoxDecoration(),
+        child: Icon(
+          icon,
+          color: index == _selectedItemIndex ? Color(0XFF00B868) : Colors.grey,
+>>>>>>> c8790ca3612bf1ebdc74475d5f60ffb5c5088964
         ),
       ],
     ));
