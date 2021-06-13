@@ -16,15 +16,31 @@ class _ProfilPageState extends State<ProfilPage> {
     super.initState();
   }
 
-  TextEditingController nimController = TextEditingController();
-  TextEditingController namaController = TextEditingController();
-  TextEditingController kelasController = TextEditingController();
-  TextEditingController jurusanController = TextEditingController();
-  TextEditingController alamatController = TextEditingController();
-  TextEditingController notelpController = TextEditingController();
-  TextEditingController angkatanController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
-  TextEditingController emailController = TextEditingController();
+  showAlertDialog(BuildContext context) {
+    // set up the buttons
+    Widget cancelButton = FlatButton(
+      child: Text("No"),
+      onPressed: () {
+        Navigator.pop(context);
+      },
+    );
+    Widget continueButton = FlatButton(
+      child: Text("Yes"),
+      onPressed: () {
+        _signOut();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog aler = AlertDialog(
+      title: Text("Alert"),
+      content: Text("Are you sure want to sign out?"),
+      actions: [
+        cancelButton,
+        continueButton,
+      ],
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,7 +109,6 @@ class _ProfilPageState extends State<ProfilPage> {
             margin: EdgeInsets.symmetric(horizontal: defaultMargin),
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: TextField(
-              controller: nimController,
               readOnly: true,
               decoration: InputDecoration(
                   border: InputBorder.none, hintText: userLoginModel.nim),
@@ -112,7 +127,6 @@ class _ProfilPageState extends State<ProfilPage> {
             margin: EdgeInsets.symmetric(horizontal: defaultMargin),
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: TextField(
-              controller: namaController,
               readOnly: true,
               decoration: InputDecoration(
                   border: InputBorder.none, hintText: userLoginModel.nama),
@@ -131,7 +145,6 @@ class _ProfilPageState extends State<ProfilPage> {
             margin: EdgeInsets.symmetric(horizontal: defaultMargin),
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: TextField(
-              controller: kelasController,
               readOnly: true,
               decoration: InputDecoration(
                   border: InputBorder.none, hintText: userLoginModel.kelas),
@@ -150,7 +163,6 @@ class _ProfilPageState extends State<ProfilPage> {
             margin: EdgeInsets.symmetric(horizontal: defaultMargin),
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: TextField(
-              controller: jurusanController,
               readOnly: true,
               decoration: InputDecoration(
                   border: InputBorder.none, hintText: userLoginModel.jurusan),
@@ -169,7 +181,6 @@ class _ProfilPageState extends State<ProfilPage> {
             margin: EdgeInsets.symmetric(horizontal: defaultMargin),
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: TextField(
-              controller: alamatController,
               readOnly: true,
               decoration: InputDecoration(
                   border: InputBorder.none, hintText: userLoginModel.alamat),
@@ -188,7 +199,6 @@ class _ProfilPageState extends State<ProfilPage> {
             margin: EdgeInsets.symmetric(horizontal: defaultMargin),
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: TextField(
-              controller: notelpController,
               readOnly: true,
               decoration: InputDecoration(
                   border: InputBorder.none, hintText: userLoginModel.notelp),
@@ -207,7 +217,6 @@ class _ProfilPageState extends State<ProfilPage> {
             margin: EdgeInsets.symmetric(horizontal: defaultMargin),
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: TextField(
-              controller: angkatanController,
               readOnly: true,
               decoration: InputDecoration(
                   border: InputBorder.none, hintText: userLoginModel.angkatan),
@@ -226,7 +235,6 @@ class _ProfilPageState extends State<ProfilPage> {
             margin: EdgeInsets.symmetric(horizontal: defaultMargin),
             padding: EdgeInsets.symmetric(horizontal: 10),
             child: TextField(
-              controller: emailController,
               readOnly: true,
               decoration: InputDecoration(
                   border: InputBorder.none, hintText: userLoginModel.email),
@@ -320,6 +328,7 @@ class _ProfilPageState extends State<ProfilPage> {
     UserLoginServices.getUserLogin(requestBody).then((value) {
       //Decode response
       final result = value;
+      print(result);
       //check status
       if (result.success == true && result.code == 200) {
         //parse model and return value
@@ -330,5 +339,12 @@ class _ProfilPageState extends State<ProfilPage> {
       } else {}
     });
     //print(userLoginModel.id);
+  }
+
+  void _signOut() async {
+    final storage = FlutterSecureStorage();
+    await storage.write(key: Constanta.keyUserId, value: "");
+
+    Navigator.popUntil(context, (route) => route.isFirst);
   }
 }

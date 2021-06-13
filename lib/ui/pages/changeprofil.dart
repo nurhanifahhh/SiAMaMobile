@@ -28,8 +28,8 @@ class _ChangeprofilState extends State<Changeprofil> {
   @override
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  bool isLoading = false;
   String userId = "0";
+  bool isLoading = false;
 
   Widget build(BuildContext context) {
     return GeneralPage(
@@ -41,94 +41,123 @@ class _ChangeprofilState extends State<Changeprofil> {
       child: Form(
         key: _formKey,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            SizedBox(height: 15.0),
-            TextFormField(
-              controller: txtnama,
-              //validator: _validateEmail,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                fillColor: Colors.white,
-                filled: true,
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  borderSide: BorderSide(color: mainColor, width: 2),
+          children: [
+            Container(margin: EdgeInsets.all(8)),
+            Container(
+              width: double.infinity,
+              margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: TextField(
+                controller: txtnama,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  fillColor: Colors.white,
+                  filled: true,
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                    borderSide: BorderSide(color: Colors.blueAccent, width: 2),
+                  ),
+                  hintText: userLoginModel.nama,
+                  labelText: "Nama",
+                  prefixIcon: Icon(Icons.person),
                 ),
-                hintText: userLoginModel.nama,
-                prefixIcon: Icon(Icons.lock, color: Colors.black),
+                style: TextStyle(color: Colors.black87),
               ),
             ),
-            Text(""),
-            TextFormField(
-              controller: txtalamat,
-              //validator: _validateEmail,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                fillColor: Colors.white,
-                filled: true,
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  borderSide: BorderSide(color: mainColor, width: 2),
+            Container(
+              width: double.infinity,
+              margin: EdgeInsets.fromLTRB(defaultMargin, 5, defaultMargin, 5),
+            ),
+            Container(
+              width: double.infinity,
+              margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: TextField(
+                controller: txtalamat,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  fillColor: Colors.white,
+                  filled: true,
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                    borderSide: BorderSide(color: Colors.blueAccent, width: 2),
+                  ),
+                  hintText: userLoginModel.alamat,
+                  labelText: "Address",
+                  prefixIcon: Icon(Icons.location_city),
                 ),
-                hintText: userLoginModel.alamat,
-                prefixIcon: Icon(Icons.lock, color: Colors.black),
+                style: TextStyle(color: Colors.black87),
               ),
             ),
-            Text(""),
-            TextFormField(
-              controller: txtnotelp,
-              //validator: _validateEmail,
-              decoration: InputDecoration(
-                border: InputBorder.none,
-                fillColor: Colors.white,
-                filled: true,
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                  borderSide: BorderSide(color: mainColor, width: 2),
+            Container(
+              width: double.infinity,
+              margin: EdgeInsets.fromLTRB(defaultMargin, 5, defaultMargin, 5),
+            ),
+            Container(
+              width: double.infinity,
+              margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: TextField(
+                keyboardType: TextInputType.number,
+                controller: txtnotelp,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  fillColor: Colors.white,
+                  filled: true,
+                  focusedBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.all(Radius.circular(8)),
+                    borderSide: BorderSide(color: Colors.blueAccent, width: 2),
+                  ),
+                  hintText: userLoginModel.notelp,
+                  labelText: "Phone Number",
+                  prefixIcon: Icon(Icons.phone_android),
                 ),
-                hintText: userLoginModel.notelp,
-                prefixIcon: Icon(Icons.lock, color: Colors.black),
+                style: TextStyle(color: Colors.black87),
               ),
             ),
-            Text(""),
-            ButtonTheme(
+            Container(
+              margin: EdgeInsets.only(
+                  top: 24, left: defaultMargin, right: defaultMargin),
+              padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+              child: ButtonTheme(
                 buttonColor: mainColor,
                 minWidth: double.infinity,
-                padding: EdgeInsets.symmetric(horizontal: 10),
                 height: 45,
                 shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(22.0),
+                  borderRadius: BorderRadius.circular(22),
                 ),
-                child: RaisedButton(
-                  onPressed: () {
-                    updateProfile();
-                  },
-                  child: Text(
-                    "Change Profile",
-                    style: TextStyle(color: whiteColor, fontSize: 18.0),
-                  ),
-                )),
+                child: isLoading
+                    ? CircularProgressIndicator()
+                    : RaisedButton(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        onPressed: () => updateProfile(),
+                        child: Text(
+                          "Change",
+                          style: TextStyle(color: Colors.white, fontSize: 18.0),
+                        ),
+                      ),
+              ),
+            ),
           ],
         ),
       ),
     );
   }
 
-  void updateProfile() {
+  void updateProfile() async {
     setState(() {
       isLoading = true;
     });
 
-    UserLoginModel userLoginModel = new UserLoginModel(
-        id: widget.userLoginModel.id,
-        nama: txtnama.text,
-        alamat: txtalamat.text,
-        notelp: txtnotelp.text
-        );
+    final storage = FlutterSecureStorage();
+    UserLoginModel userLoginModel = widget.userLoginModel;
+    userLoginModel.id = await storage.read(key: Constanta.keyUserId);
+    userLoginModel.nama = txtnama.text;
+    userLoginModel.alamat = txtalamat.text;
+    userLoginModel.notelp = txtnotelp.text;
 
     var requestBody = jsonEncode(userLoginModel.toJson());
+    print(requestBody);
     UserLoginServices.updateData(requestBody).then((value) {
       //Decode response
       final result = value;

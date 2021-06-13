@@ -35,10 +35,86 @@ class _SignInPageState extends State<SignInPage> {
         print(uid);
 
         _storeUserData();
+        nimController.text="";
+        passwordController.text="";
+        _successDialog();
       } else {
-        //print(requestBody);
+        _showDialog();
       }
     }).catchError((error) {});
+  }
+
+  Future<void> _showDialog() async {
+    return showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Error Login"),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  Text("Email or Password is incorrect!"),
+                  Text("Please enter the correct Email and Password"),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        });
+  }
+
+  Future<void> _successDialog() async {
+    return showDialog<void>(
+        context: context,
+        barrierDismissible: false, // user must tap button
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text("Login Success"),
+            content: SingleChildScrollView(
+              child: ListBody(
+                children: <Widget>[
+                  Text("Welcome to the System!"),
+                  Text("Lets Start!"),
+                  Text(uid),
+                ],
+              ),
+            ),
+            actions: <Widget>[
+              TextButton(
+                child: Text("OK"),
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (context) => ProfilPage()),
+                  );
+                },
+              ),
+            ],
+          );
+        });
+  }
+
+  void sendRequestGetDataUserLogin() {
+    UserLoginModel userLoginModel = new UserLoginModel();
+    var requestBody = jsonEncode(userLoginModel.toJson());
+    UserLoginServices.getUserLogin(requestBody).then((value) {
+      final result = value;
+      if (result.success == true && result.code == 200) {
+
+      } else {
+
+      }
+    }).catchError((error) {
+      String err = error.toString();
+    });
   }
 
   void _storeUserData() async {

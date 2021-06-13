@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: ForgotPassword(),
+        home: ScreenPage(),
         routes: <String, WidgetBuilder>{
           '/screen_page': (BuildContext context) => ScreenPage(),
           '/sign_in_page': (BuildContext context) => SignInPage(),
@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
           '/changepassword': (BuildContext context) => ResetPassword(),
           '/changeprofil': (BuildContext context) => Changeprofil(),
           '/profileuser': (BuildContext context) => ProfilPage(),
+          '/siama_page': (BuildContext context) => SiamaPage(),
         });
   }
 }

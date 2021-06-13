@@ -10,27 +10,24 @@ class ResetPassword extends StatefulWidget {
 }
 
 class _ResetPasswordState extends State<ResetPassword> {
-  UserLoginModel userLoginModel = new UserLoginModel();
-
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   TextEditingController txtoldpassword = new TextEditingController();
   TextEditingController txtnewpassword = new TextEditingController();
   TextEditingController txtrenewpassword = new TextEditingController();
 
-  @override
-  void initState() {
-    txtoldpassword.text = widget.userLoginModel.password;
-    txtnewpassword.text = widget.userLoginModel.password;
-    txtrenewpassword.text = widget.userLoginModel.password;
+  //@override
+  //void initState() {
+  //txtoldpassword.text = widget.userLoginModel.password;
+  //txtnewpassword.text = widget.userLoginModel.password;
+  //txtrenewpassword.text = widget.userLoginModel.password;
 
-    super.initState();
-  }
+  //super.initState();
+  //}
 
-  @override
-  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
-  bool isLoading = false;
   String userId = "0";
+  bool isLoading = false;
 
+  @override
   Widget build(BuildContext context) {
     return GeneralPage(
       title: 'Change Password',
@@ -116,7 +113,7 @@ class _ResetPasswordState extends State<ResetPassword> {
     );
   }
 
-  void updatePassword() {
+  void updatePassword() async {
     bool isValid = true;
     txtoldpassword.text == widget.userLoginModel.password &&
             txtnewpassword.text == txtrenewpassword.text
@@ -129,10 +126,16 @@ class _ResetPasswordState extends State<ResetPassword> {
         isLoading = true;
       });
       //update password
-      UserLoginModel userLoginModel = new UserLoginModel(
-          id: widget.userLoginModel.id, password: txtnewpassword.text);
+
+      final storage = FlutterSecureStorage();
+      UserLoginModel userLoginModel = widget.userLoginModel;
+      userLoginModel.id = await storage.read(key: Constanta.keyUserId);
+      userLoginModel.password = txtoldpassword.text;
+      userLoginModel.password = txtnewpassword.text;
+      userLoginModel.password = txtrenewpassword.text;
 
       var requestBody = jsonEncode(userLoginModel.toJson());
+      print(requestBody);
       UserLoginServices.updateData(requestBody).then((value) {
         final result = value;
         if (result.success == true && result.code == 200) {
