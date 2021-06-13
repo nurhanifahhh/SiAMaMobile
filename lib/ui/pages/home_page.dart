@@ -217,7 +217,7 @@ class _HomePageState extends State<HomePage> {
             ? BoxDecoration(
                 border:
                     Border(bottom: BorderSide(width: 4, color: Colors.green)),
-                gradient: LinearGradient(colors: [
+                gradient: LinearGradient(Colors: whiteColor [
                   Colors.green.withOpacity(0.3),
                   Colors.green.withOpacity(0.016),
                 ], begin: Alignment.bottomCenter, end: Alignment.topCenter))
