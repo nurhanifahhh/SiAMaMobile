@@ -12,7 +12,7 @@ class _ProfilePageState extends State<ProfilePage> {
         title: 'Profile Kampus',
         subtitle: "Visi & Misi",
         onBackButtonPressed: () {
-          Navigator.pushNamed(context, '/sign_in_page');
+          Navigator.pushNamed(context, '/navigation');
         },
         child: Column(children: [
           Container(

@@ -12,7 +12,8 @@ class GeneralPage extends StatelessWidget {
       this.subtitle = "subtittle",
       this.onBackButtonPressed,
       this.child,
-      this.backColor});
+      this.backColor,
+      Column body});
 
   @override
   Widget build(BuildContext context) {

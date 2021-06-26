@@ -44,6 +44,7 @@ class _ResetPasswordState extends State<ResetPassword> {
             SizedBox(height: 15.0),
             TextFormField(
               controller: txtoldpassword,
+              obscureText: true,
               //validator: _validateEmail,
               decoration: InputDecoration(
                 border: InputBorder.none,
@@ -60,6 +61,7 @@ class _ResetPasswordState extends State<ResetPassword> {
             Text(""),
             TextFormField(
               controller: txtnewpassword,
+              obscureText: true,
               //validator: _validateEmail,
               decoration: InputDecoration(
                 border: InputBorder.none,
@@ -76,6 +78,7 @@ class _ResetPasswordState extends State<ResetPassword> {
             Text(""),
             TextFormField(
               controller: txtrenewpassword,
+              obscureText: true,
               //validator: _validateEmail,
               decoration: InputDecoration(
                 border: InputBorder.none,

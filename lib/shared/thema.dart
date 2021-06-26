@@ -7,6 +7,8 @@ Color yellowColor = "FFB622".toColor();
 Color whiteColor = "FFFFFF".toColor();
 Color blackColor = "000000".toColor();
 Color purpleColor = "260868".toColor();
+Color blueColor = "0000FF".toColor();
+Color greyColor = "BDBDBD".toColor();
 
 TextStyle greyFontStyle = GoogleFonts.dmSans().copyWith(color: whiteColor);
 TextStyle whiteFontStyle = GoogleFonts.dmSans().copyWith(color: whiteColor);
