@@ -174,7 +174,7 @@ class _ResetPasswordState extends State<ResetPassword> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ProfilPage()),
+                    MaterialPageRoute(builder: (context) => NavigationBar()),
                   );
                 },
               ),

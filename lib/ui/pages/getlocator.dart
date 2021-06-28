@@ -243,29 +243,33 @@ class _GetLocatorState extends State<GetLocator> {
                       ),
               ),
             ),
-            // Container(
-            //   margin: EdgeInsets.only(
-            //       top: 24, left: defaultMargin, right: defaultMargin),
-            //   padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-            //   child: ButtonTheme(
-            //     buttonColor: mainColor,
-            //     minWidth: double.infinity,
-            //     height: 45,
-            //     shape: RoundedRectangleBorder(
-            //       borderRadius: BorderRadius.circular(22),
-            //     ),
-            //     child: isLoading
-            //         ? CircularProgressIndicator()
-            //         : RaisedButton(
-            //             padding: EdgeInsets.symmetric(horizontal: 10),
-            //             onPressed: () => qrCode(),
-            //             child: Text(
-            //               "Scan QR Code",
-            //               style: TextStyle(color: Colors.white, fontSize: 18.0),
-            //             ),
-            //           ),
-            //   ),
-            // ),
+            Container(
+              margin: EdgeInsets.only(
+                  top: 24, left: defaultMargin, right: defaultMargin),
+              padding: EdgeInsets.symmetric(horizontal: defaultMargin),
+              child: ButtonTheme(
+                buttonColor: mainColor,
+                minWidth: double.infinity,
+                height: 45,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(22),
+                ),
+                child: isLoading
+                    ? CircularProgressIndicator()
+                    : RaisedButton(
+                        padding: EdgeInsets.symmetric(horizontal: 10),
+                        onPressed: () => Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ScanQRAbsen()),
+                        ),
+                        child: Text(
+                          "Scan QR Code",
+                          style: TextStyle(color: Colors.white, fontSize: 18.0),
+                        ),
+                      ),
+              ),
+            ),
 
             // Container(
             //   margin: EdgeInsets.only(

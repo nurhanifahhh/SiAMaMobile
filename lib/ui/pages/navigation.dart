@@ -10,7 +10,7 @@ class _NavigationBarState extends State<NavigationBar> {
   List<Widget> _widgetOptions = <Widget>[
     HomePage(),
     Calendar(),
-    Text('Scan QR Code'),
+    ListAbsensiPage(),
     ProfilPage(),
   ];
 

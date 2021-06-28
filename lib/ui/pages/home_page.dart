@@ -60,7 +60,7 @@ class _HomePageState extends State<HomePage> {
                 // ),
                 // Text(""),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Container(
                       width: 90,
@@ -69,39 +69,44 @@ class _HomePageState extends State<HomePage> {
                           image: DecorationImage(
                               image: AssetImage('assets/profil.png'))),
                     ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text(
-                      "Hello,",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                      ),
-                    ),
-                    SizedBox(
-                      width: 10,
-                    ),
-                    Text(
-                      userLoginModel.nama ?? "",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 20,
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    SizedBox(
-                      width: 60,
-                    ),
-                    Text(
-                      userLoginModel.nim ?? "",
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 14,
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "Hello,",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Text(
+                            userLoginModel.nama ?? "",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 17,
+                            ),
+                          ),
+                          Text(
+                            userLoginModel.nim ?? "",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                            ),
+                          ),
+                          Text(
+                            userLoginModel.kelas ?? "",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
                       ),
                     ),
                   ],
@@ -110,26 +115,25 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Positioned(
-            top: 240,
-            height: MediaQuery.of(context).size.height - 300,
+            top: 200,
+            height: MediaQuery.of(context).size.height - 260,
             child: Column(
               children: [
                 Container(
-                  height: 220,
+                  height: 210,
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.only(left: 30, right: 30, top: 30),
                   decoration: BoxDecoration(
                     color: Colors.grey[100],
                   ),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "Jadwal Hari Ini",
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: Colors.grey),
+                            color: Colors.black),
                       ),
                       Expanded(
                         child: ListView(
@@ -168,7 +172,7 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
-                              color: Colors.grey),
+                              color: Colors.black),
                         ),
                         new SizedBox(
                           height: 2.0,
@@ -182,15 +186,18 @@ class _HomePageState extends State<HomePage> {
                               //   Navigator.of(context).push(new CupertinoPageRoute(
                               //       builder: (context) => Privilages()));
                               // },
-                              child: new CircleAvatar(
-                                backgroundColor: Color(0xFFBDBDBD),
-                                maxRadius: 50.0,
+                              child: Container(
+                                // color: Color(0xFFBDBDBD),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
-                                    new Icon(
-                                      Icons.history,
-                                      color: Colors.green,
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/absen.png'))),
                                     ),
                                     new SizedBox(
                                       height: 10.0,
@@ -198,7 +205,7 @@ class _HomePageState extends State<HomePage> {
                                     new Text("Riwayat Absen",
                                         style: TextStyle(
                                           color: Colors.green,
-                                          fontSize: 13,
+                                          fontSize: 18,
                                         )),
                                   ],
                                 ),
@@ -209,15 +216,18 @@ class _HomePageState extends State<HomePage> {
                               //   Navigator.of(context).push(new CupertinoPageRoute(
                               //       builder: (context) => AppUsers()));
                               // },
-                              child: new CircleAvatar(
-                                backgroundColor: Color(0xFFBDBDBD),
-                                maxRadius: 50.0,
+                              child: Container(
+                                // color: Color(0xFFBDBDBD),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
-                                    new Icon(
-                                      Icons.access_alarm,
-                                      color: Colors.green,
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/jadwalkuliah.png'))),
                                     ),
                                     new SizedBox(
                                       height: 10.0,
@@ -225,7 +235,7 @@ class _HomePageState extends State<HomePage> {
                                     new Text("Jadwal Kuliah",
                                         style: TextStyle(
                                           color: Colors.green,
-                                          fontSize: 14,
+                                          fontSize: 18,
                                         )),
                                   ],
                                 ),
@@ -234,25 +244,31 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                         new SizedBox(
-                          height: 2.0,
+                          height: 10.0,
                         ),
                         new Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
+                            SizedBox(
+                              width: 3.0,
+                            ),
                             GestureDetector(
                               // onTap: () {
                               //   Navigator.of(context).push(new CupertinoPageRoute(
                               //       builder: (context) => Privilages()));
                               // },
-                              child: new CircleAvatar(
-                                backgroundColor: Color(0xFFBDBDBD),
-                                maxRadius: 50.0,
+                              child: Container(
+                                // color: Color(0xFFBDBDBD),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
-                                    new Icon(
-                                      Icons.article_sharp,
-                                      color: Colors.green,
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/khs.png'))),
                                     ),
                                     new SizedBox(
                                       height: 10.0,
@@ -260,34 +276,41 @@ class _HomePageState extends State<HomePage> {
                                     new Text("KHS",
                                         style: TextStyle(
                                           color: Colors.green,
-                                          fontSize: 14,
+                                          fontSize: 18,
                                         )),
                                   ],
                                 ),
                               ),
                             ),
-                            new GestureDetector(
-                              // onTap: () {
-                              //   Navigator.of(context).push(new CupertinoPageRoute(
-                              //       builder: (context) => AppUsers()));
-                              // },
-                              child: new CircleAvatar(
-                                backgroundColor: Color(0xFFBDBDBD),
-                                maxRadius: 50.0,
+                            SizedBox(
+                              width: 0.0,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                    new CupertinoPageRoute(
+                                        builder: (context) => ProfilePage()));
+                              },
+                              child: Container(
+                                // color: Color(0xFFBDBDBD),
                                 child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: <Widget>[
-                                    new Icon(
-                                      Icons.account_balance,
-                                      color: Colors.green,
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/profkmpus.png'))),
                                     ),
                                     new SizedBox(
                                       height: 10.0,
                                     ),
-                                    new Text("Informasi \nAkademik",
+                                    new Text("Profil Kampus",
                                         style: TextStyle(
                                           color: Colors.green,
-                                          fontSize: 14,
+                                          fontSize: 18,
                                         )),
                                   ],
                                 ),
@@ -296,34 +319,36 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                         new SizedBox(
-                          height: 2.0,
+                          height: 10.0,
                         ),
                         new Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            GestureDetector(
-                              onTap: () {
-                                Navigator.of(context).push(
-                                    new CupertinoPageRoute(
-                                        builder: (context) => ProfilePage()));
-                              },
-                              child: new CircleAvatar(
-                                backgroundColor: Color(0xFFBDBDBD),
-                                maxRadius: 50.0,
+                            new GestureDetector(
+                              // onTap: () {
+                              //   Navigator.of(context).push(new CupertinoPageRoute(
+                              //       builder: (context) => AppUsers()));
+                              // },
+                              child: Container(
+                                // color: Color(0xFFBDBDBD),
                                 child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: <Widget>[
-                                    new Icon(
-                                      Icons.home,
-                                      color: Colors.green,
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/infoakademik.png'))),
                                     ),
                                     new SizedBox(
                                       height: 10.0,
                                     ),
-                                    new Text("Profil Kampus",
+                                    new Text("Informasi Akademik",
                                         style: TextStyle(
                                           color: Colors.green,
-                                          fontSize: 14,
+                                          fontSize: 18,
                                         )),
                                   ],
                                 ),

@@ -7,8 +7,7 @@ class ScanQRAbsen extends StatefulWidget {
 
 class _ScanQRAbsenState extends State<ScanQRAbsen> {
   String barcode = "";
-  String qrCodeResult =
-      "Qrcode Result goes here after scanning. For dev purposes"; //result goes here after scanning.
+  String qrCodeResult = ""; //result goes here after scanning.
 
   @override
   initState() {
@@ -18,6 +17,9 @@ class _ScanQRAbsenState extends State<ScanQRAbsen> {
 
   Future<void> _checkPermission() async {
     if (await Permission.camera.request().isGranted) {
+      setState(() {});
+    }
+    if (await Permission.location.request().isGranted) {
       setState(() {});
     }
   }
@@ -44,11 +46,11 @@ class _ScanQRAbsenState extends State<ScanQRAbsen> {
                   //container
                   height: 180,
                   child: Padding(
-                    padding: const EdgeInsets.fromLTRB(120, 0, 0, 0),
+                    padding: const EdgeInsets.fromLTRB(70, 0, 0, 0),
                     child: Row(
                       children: <Widget>[
                         Icon(
-                          Icons.qr_code_rounded,
+                          Icons.qr_code_scanner,
                           size: 40,
                           color: Colors.white,
                         ),
@@ -69,16 +71,16 @@ class _ScanQRAbsenState extends State<ScanQRAbsen> {
           Text("Scan QR Code Your Course",
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
           Padding(
-            padding: const EdgeInsets.fromLTRB(0, 15, 0, 5),
+            padding: const EdgeInsets.fromLTRB(0, 15, 50, 5),
           ),
           Text(this.qrCodeResult,
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold)),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
           Container(
             margin: EdgeInsets.only(
                 top: 15, left: defaultMargin, right: defaultMargin),
             padding: EdgeInsets.symmetric(horizontal: defaultMargin),
             child: ButtonTheme(
-              buttonColor: blueColor,
+              buttonColor: greenColor,
               minWidth: double.infinity,
               height: 45,
               shape: RoundedRectangleBorder(
@@ -99,14 +101,11 @@ class _ScanQRAbsenState extends State<ScanQRAbsen> {
             ),
           ),
           Container(
-            height: 15,
-          ),
-          Container(
             margin: EdgeInsets.only(
                 top: 15, left: defaultMargin, right: defaultMargin),
             padding: EdgeInsets.symmetric(horizontal: defaultMargin),
             child: ButtonTheme(
-              buttonColor: blueColor,
+              buttonColor: greenColor,
               minWidth: double.infinity,
               height: 45,
               shape: RoundedRectangleBorder(
@@ -119,7 +118,7 @@ class _ScanQRAbsenState extends State<ScanQRAbsen> {
                   //     MaterialPageRoute(builder: (context) => Navigation()));
                 },
                 child: Text(
-                  "Back",
+                  "Submit",
                   style: TextStyle(color: Colors.white, fontSize: 18.0),
                 ),
               ),
