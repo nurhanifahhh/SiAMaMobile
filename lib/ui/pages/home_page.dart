@@ -6,19 +6,19 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  int _selectedItemIndex = 2;
+  UserLoginModel userLoginModel = new UserLoginModel();
+  String userId = "0";
+  bool isLoading = false;
+
+  @override
+  void initState() {
+    readUserData();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          buildNavBarItem(Icons.home, 0),
-          buildNavBarItem(Icons.lock_outline, 1),
-          buildNavBarItem(Icons.qr_code_scanner, 2),
-          buildNavBarItem(Icons.perm_identity_rounded, 3),
-        ],
-      ),
       body: Stack(
         children: [
           Container(
@@ -29,8 +29,16 @@ class _HomePageState extends State<HomePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Icon(
-                      Icons.menu,
+                    IconButton(
+                      icon: new Icon(
+                        Icons.message_outlined,
+                      ),
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (context) => ChatScreen()),
+                        );
+                      },
                       color: Colors.white,
                     ),
                     Text(
@@ -44,29 +52,62 @@ class _HomePageState extends State<HomePage> {
                     Icon(
                       Icons.notifications,
                       color: Colors.white,
-                    )
+                    ),
                   ],
                 ),
-                SizedBox(
-                  height: 20,
-                ),
+                // SizedBox(
+                //   height: 2,
+                // ),
+                // Text(""),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    Text(
-                      "HELLO, NURHANIFAH \n 3311911037",
-                      style: TextStyle(
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                      ),
-                    ),
                     Container(
-                      width: 100,
-                      height: 100,
+                      width: 90,
+                      height: 90,
                       decoration: BoxDecoration(
                           image: DecorationImage(
                               image: AssetImage('assets/profil.png'))),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "Hello,",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 22,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Text(
+                            userLoginModel.nama ?? "",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 17,
+                            ),
+                          ),
+                          Text(
+                            userLoginModel.nim ?? "",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                            ),
+                          ),
+                          Text(
+                            userLoginModel.kelas ?? "",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 14,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
                   ],
                 ),
@@ -74,26 +115,25 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Positioned(
-            top: 180,
-            height: MediaQuery.of(context).size.height - 230,
+            top: 200,
+            height: MediaQuery.of(context).size.height - 260,
             child: Column(
               children: [
                 Container(
-                  height: 220,
+                  height: 210,
                   width: MediaQuery.of(context).size.width,
                   padding: EdgeInsets.only(left: 30, right: 30, top: 30),
                   decoration: BoxDecoration(
                     color: Colors.grey[100],
                   ),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
                         "Jadwal Hari Ini",
                         style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                            color: Colors.grey),
+                            color: Colors.black),
                       ),
                       Expanded(
                         child: ListView(
@@ -122,7 +162,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Expanded(
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 30.0),
+                    padding: EdgeInsets.symmetric(horizontal: 10.0),
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(color: Colors.white),
                     child: ListView(
@@ -132,32 +172,188 @@ class _HomePageState extends State<HomePage> {
                           style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
-                              color: Colors.grey),
+                              color: Colors.black),
+                        ),
+                        new SizedBox(
+                          height: 2.0,
                         ),
                         // SizedBox(height: 5),
-                        Row(
+                        new Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            buildExpenseBotton(
-                                Icons.home, "Profil Kampus", true),
-                            buildExpenseBotton(
-                                Icons.access_alarm, "Jadwal Kuliah", true),
+                          children: <Widget>[
+                            GestureDetector(
+                              // onTap: () {
+                              //   Navigator.of(context).push(new CupertinoPageRoute(
+                              //       builder: (context) => Privilages()));
+                              // },
+                              child: Container(
+                                // color: Color(0xFFBDBDBD),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/absen.png'))),
+                                    ),
+                                    new SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    new Text("Riwayat Absen",
+                                        style: TextStyle(
+                                          color: Colors.green,
+                                          fontSize: 18,
+                                        )),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            new GestureDetector(
+                              // onTap: () {
+                              //   Navigator.of(context).push(new CupertinoPageRoute(
+                              //       builder: (context) => AppUsers()));
+                              // },
+                              child: Container(
+                                // color: Color(0xFFBDBDBD),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/jadwalkuliah.png'))),
+                                    ),
+                                    new SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    new Text("Jadwal Kuliah",
+                                        style: TextStyle(
+                                          color: Colors.green,
+                                          fontSize: 18,
+                                        )),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ],
                         ),
-                        Row(
+                        new SizedBox(
+                          height: 10.0,
+                        ),
+                        new Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            buildExpenseBotton(
-                                Icons.article_sharp, "KHS", true),
-                            buildExpenseBotton(
-                                Icons.check_box_rounded, "Absensi", true),
+                          children: <Widget>[
+                            SizedBox(
+                              width: 3.0,
+                            ),
+                            GestureDetector(
+                              // onTap: () {
+                              //   Navigator.of(context).push(new CupertinoPageRoute(
+                              //       builder: (context) => Privilages()));
+                              // },
+                              child: Container(
+                                // color: Color(0xFFBDBDBD),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/khs.png'))),
+                                    ),
+                                    new SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    new Text("KHS",
+                                        style: TextStyle(
+                                          color: Colors.green,
+                                          fontSize: 18,
+                                        )),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            SizedBox(
+                              width: 0.0,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.of(context).push(
+                                    new CupertinoPageRoute(
+                                        builder: (context) => ProfilePage()));
+                              },
+                              child: Container(
+                                // color: Color(0xFFBDBDBD),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/profkmpus.png'))),
+                                    ),
+                                    new SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    new Text("Profil Kampus",
+                                        style: TextStyle(
+                                          color: Colors.green,
+                                          fontSize: 18,
+                                        )),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ],
                         ),
-                        Column(
+                        new SizedBox(
+                          height: 10.0,
+                        ),
+                        new Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            buildExpenseBotton(Icons.account_balance,
-                                "Informasi Akademik", true),
+                          children: <Widget>[
+                            new GestureDetector(
+                              // onTap: () {
+                              //   Navigator.of(context).push(new CupertinoPageRoute(
+                              //       builder: (context) => AppUsers()));
+                              // },
+                              child: Container(
+                                // color: Color(0xFFBDBDBD),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    Container(
+                                      width: 50,
+                                      height: 50,
+                                      decoration: BoxDecoration(
+                                          image: DecorationImage(
+                                              image: AssetImage(
+                                                  'assets/infoakademik.png'))),
+                                    ),
+                                    new SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    new Text("Informasi Akademik",
+                                        style: TextStyle(
+                                          color: Colors.green,
+                                          fontSize: 18,
+                                        )),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ],
                         ),
                       ],
@@ -172,63 +368,31 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Container buildExpenseBotton(IconData icon, String title, bool isActive) {
-    return Container(
-      height: 80,
-      width: 170,
-      decoration: BoxDecoration(
-        color: isActive ? Colors.white : Colors.black.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(10.0),
-      ),
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            icon,
-            color: isActive ? Color(0XFF00B686) : Colors.white,
-          ),
-          SizedBox(
-            height: 5,
-          ),
-          Text(
-            title,
-            style: TextStyle(
-              fontSize: 15,
-              fontWeight: FontWeight.bold,
-              color: isActive ? Color(0XFF00B686) : Colors.white,
-            ),
-          )
-        ],
-      ),
-    );
+  void readUserData() async {
+    final storage = FlutterSecureStorage();
+    userId = await storage.read(key: Constanta.keyUserId);
+    getDataUserLogin();
   }
 
-  GestureDetector buildNavBarItem(IconData icon, int index) {
-    return GestureDetector(
-      onTap: () {
+  void getDataUserLogin() {
+    setState(() {
+      isLoading = true;
+    });
+    Map map = {
+      "id": userId,
+    };
+    var requestBody = jsonEncode(map);
+    UserLoginServices.getUserLogin(requestBody).then((value) {
+      //Decode response
+      final result = value;
+      //check status
+      if (result.success == true && result.code == 200) {
+        //parse model and return value
+        userLoginModel = UserLoginModel.fromJson(result.content);
         setState(() {
-          _selectedItemIndex = index;
-          
+          isLoading = false;
         });
-      },
-      child: Container(
-        width: MediaQuery.of(context).size.width / 5,
-        height: 60,
-        decoration: index == _selectedItemIndex
-            ? BoxDecoration(
-                border:
-                    Border(bottom: BorderSide(width: 4, color: Colors.green)),
-                gradient: LinearGradient(colors: [
-                  Colors.green.withOpacity(0.3),
-                  Colors.green.withOpacity(0.016),
-                ], begin: Alignment.bottomCenter, end: Alignment.topCenter)
-                )
-            : BoxDecoration(),
-        child: Icon(
-          icon,
-          color: index == _selectedItemIndex ? Color(0XFF00B868) : Colors.grey,
-        ),
-      ),
-    );
+      } else {}
+    });
   }
 }

@@ -196,7 +196,7 @@ class _ChangeprofilState extends State<Changeprofil> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => ProfilPage()),
+                    MaterialPageRoute(builder: (context) => NavigationBar()),
                   );
                 },
               ),

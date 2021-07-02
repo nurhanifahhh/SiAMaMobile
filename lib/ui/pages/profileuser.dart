@@ -241,67 +241,79 @@ class _ProfilPageState extends State<ProfilPage> {
             ),
           ),
           Container(
-            width: double.infinity,
-            margin: EdgeInsets.only(top: 24),
-            height: 45,
+            margin: EdgeInsets.only(
+                top: 15, left: defaultMargin, right: defaultMargin),
             padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-            child: RaisedButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            Changeprofil(userLoginModel: userLoginModel)));
-              },
-              elevation: 0,
+            child: ButtonTheme(
+              buttonColor: mainColor,
+              minWidth: double.infinity,
+              height: 45,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
-              color: mainColor,
-              child: Text(
-                'Change Profile',
-                style: whiteFontStyle,
+                borderRadius: BorderRadius.circular(22),
+              ),
+              child: RaisedButton(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              Changeprofil(userLoginModel: userLoginModel)));
+                },
+                child: Text(
+                  "Change Profile",
+                  style: TextStyle(color: Colors.white, fontSize: 18.0),
+                ),
               ),
             ),
           ),
           Container(
-            width: double.infinity,
-            margin: EdgeInsets.only(top: 24),
-            height: 45,
+            margin: EdgeInsets.only(
+                top: 15, left: defaultMargin, right: defaultMargin),
             padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-            child: RaisedButton(
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) =>
-                            ResetPassword(userLoginModel: userLoginModel)));
-              },
-              elevation: 0,
+            child: ButtonTheme(
+              buttonColor: mainColor,
+              minWidth: double.infinity,
+              height: 45,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
-              color: mainColor,
-              child: Text(
-                'Change Password',
-                style: whiteFontStyle,
+                borderRadius: BorderRadius.circular(22),
+              ),
+              child: RaisedButton(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              ResetPassword(userLoginModel: userLoginModel)));
+                },
+                child: Text(
+                  "Change Password",
+                  style: TextStyle(color: Colors.white, fontSize: 18.0),
+                ),
               ),
             ),
           ),
           Container(
-            width: double.infinity,
-            margin: EdgeInsets.only(top: 24),
-            height: 45,
+            margin: EdgeInsets.only(
+                top: 15, left: defaultMargin, right: defaultMargin),
             padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-            child: RaisedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, '/home_page');
-              },
-              elevation: 0,
+            child: ButtonTheme(
+              buttonColor: mainColor,
+              minWidth: double.infinity,
+              height: 45,
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8)),
-              color: mainColor,
-              child: Text(
-                'Back To Home',
-                style: whiteFontStyle,
+                borderRadius: BorderRadius.circular(22),
+              ),
+              child: RaisedButton(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                onPressed: () {
+                  _signOut();
+                },
+                child: Text(
+                  "Logout",
+                  style: TextStyle(color: Colors.white, fontSize: 18.0),
+                ),
               ),
             ),
           ),

@@ -1,19 +1,19 @@
 part of 'pages.dart';
 
-class SignInPage extends StatefulWidget {
+class AdminLogin extends StatefulWidget {
   // static String tag = 'UserLogin';
 
   @override
-  _SignInPageState createState() => _SignInPageState();
+  _AdminLoginState createState() => _AdminLoginState();
 }
 
-class _SignInPageState extends State<SignInPage> {
-  TextEditingController nimController = TextEditingController();
+class _AdminLoginState extends State<AdminLogin> {
+  TextEditingController nidController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   bool isLoading = false;
-  String uid;
+  String uida;
 
-  UserLoginModel userLoginModel = new UserLoginModel();
+  AdminModel adminModel = new AdminModel();
   ApiResponse apiResponse;
 
   @override
@@ -22,20 +22,20 @@ class _SignInPageState extends State<SignInPage> {
   }
 
   void authentication() {
-    UserLoginModel userLoginModel = new UserLoginModel(
-        nim: nimController.text, password: passwordController.text);
+    AdminModel adminModel = new AdminModel(
+        nid: nidController.text, password: passwordController.text);
 
-    var requestBody = jsonEncode(userLoginModel.toJson());
+    var requestBody = jsonEncode(adminModel.toJson());
     print(requestBody);
-    UserLoginServices.authentication(requestBody).then((value) {
+    AdminServices.authentication(requestBody).then((value) {
       final result = value;
       if (result.success == true && result.code == 200) {
-        userLoginModel = UserLoginModel.fromJson(result.content);
-        uid = userLoginModel.id.toString();
-        print(uid);
+        adminModel = AdminModel.fromJson(result.content);
+        uida = adminModel.id.toString();
+        print(uida);
 
-        _storeUserData();
-        nimController.text = "";
+        _storeAdminData();
+        nidController.text = "";
         passwordController.text = "";
         _successDialog();
       } else {
@@ -54,8 +54,8 @@ class _SignInPageState extends State<SignInPage> {
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  Text("NIM or Password is incorrect!"),
-                  Text("Please enter the correct NIM and Password"),
+                  Text("NID or Password is incorrect!"),
+                  Text("Please enter the correct NID and Password"),
                 ],
               ),
             ),
@@ -83,7 +83,7 @@ class _SignInPageState extends State<SignInPage> {
                 children: <Widget>[
                   Text("Welcome to the System!"),
                   Text("Lets Start!"),
-                  Text(uid),
+                  Text(uida),
                 ],
               ),
             ),
@@ -93,7 +93,7 @@ class _SignInPageState extends State<SignInPage> {
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (context) => NavigationBar()),
+                    MaterialPageRoute(builder: (context) => AdminHome()),
                   );
                 },
               ),
@@ -102,10 +102,10 @@ class _SignInPageState extends State<SignInPage> {
         });
   }
 
-  void sendRequestGetDataUserLogin() {
-    UserLoginModel userLoginModel = new UserLoginModel();
-    var requestBody = jsonEncode(userLoginModel.toJson());
-    UserLoginServices.getUserLogin(requestBody).then((value) {
+  void sendRequestGetDataAdminLogin() {
+    AdminModel adminModel = new AdminModel();
+    var requestBody = jsonEncode(adminModel.toJson());
+    AdminServices.getAdminLogin(requestBody).then((value) {
       final result = value;
       if (result.success == true && result.code == 200) {
       } else {}
@@ -114,12 +114,12 @@ class _SignInPageState extends State<SignInPage> {
     });
   }
 
-  void _storeUserData() async {
+  void _storeAdminData() async {
     final storage = FlutterSecureStorage();
-    await storage.write(key: Constanta.keyUserId, value: uid);
+    await storage.write(key: Constanta.keyAdminId, value: uida);
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => NavigationBar()),
+      MaterialPageRoute(builder: (context) => AdminHome()),
     );
   }
 
@@ -145,7 +145,7 @@ class _SignInPageState extends State<SignInPage> {
             width: double.infinity,
             margin: EdgeInsets.fromLTRB(defaultMargin, 26, defaultMargin, 6),
             child: Text(
-              "NIM",
+              "NID",
               style: whiteFontStyle2,
             ),
           ),
@@ -157,11 +157,11 @@ class _SignInPageState extends State<SignInPage> {
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: "0C3B2E".toColor())),
             child: TextField(
-              controller: nimController,
+              controller: nidController,
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintStyle: whiteFontStyle3,
-                  hintText: 'Masukan NIM'),
+                  hintText: 'Masukan NID'),
             ),
           ),
           Container(
@@ -190,31 +190,8 @@ class _SignInPageState extends State<SignInPage> {
             ),
           ),
           Container(
-            margin: EdgeInsets.only(top: 1),
-            alignment: Alignment.bottomRight,
-            padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-            child: isLoading
-                ? SpinKitFadingCircle(size: 45, color: Colors.black)
-                : RaisedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/forgotpassword');
-                    },
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8)),
-                    color: Colors.white,
-                    child: Text(
-                      'Forgot Password?',
-                      style: GoogleFonts.dmSans(
-                          color: Colors.black,
-                          fontSize: 16,
-                          fontWeight: FontWeight.w500),
-                    ),
-                  ),
-          ),
-          Container(
             width: double.infinity,
-            margin: EdgeInsets.only(top: 5),
+            margin: EdgeInsets.only(top: 15),
             height: 45,
             padding: EdgeInsets.symmetric(horizontal: defaultMargin),
             child: isLoading
@@ -235,56 +212,6 @@ class _SignInPageState extends State<SignInPage> {
                       'Sign In',
                       style: GoogleFonts.dmSans(
                           color: Colors.white, fontWeight: FontWeight.w500),
-                    ),
-                  ),
-          ),
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.only(top: 5),
-            height: 45,
-            padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-            child: isLoading
-                ? SpinKitFadingCircle(
-                    size: 45,
-                    color: mainColor,
-                  )
-                : RaisedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/loginadmin');
-                    },
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8)),
-                    color: newColor,
-                    child: Text(
-                      'Admin Login',
-                      style: GoogleFonts.dmSans(
-                          color: Colors.white, fontWeight: FontWeight.w500),
-                    ),
-                  ),
-          ),
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.only(top: 5),
-            height: 45,
-            padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-            child: isLoading
-                ? SpinKitFadingCircle(
-                    size: 45,
-                    color: greenColor,
-                  )
-                : RaisedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/sign_up_page');
-                    },
-                    elevation: 0,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8)),
-                    color: yellowColor,
-                    child: Text(
-                      'Registrasi',
-                      style: GoogleFonts.poppins(
-                          color: Colors.black, fontWeight: FontWeight.w500),
                     ),
                   ),
           ),

@@ -4,3 +4,4 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:supercharged/supercharged.dart';
 
 part 'thema.dart';
+part 'themacalendar.dart';
