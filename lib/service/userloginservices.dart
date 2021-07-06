@@ -10,6 +10,8 @@ class UserLoginServices {
   static String endpoint6 =
       Constanta.baseApiUrl + "/UserLogin/sendemailverification.php";
   static String endpoint7 = Constanta.baseApiUrl + "/UserLogin/read.php";
+  static String endpoint8 = Constanta.baseApiUrl + "/absensi/checkloc.php";
+  static String endpoint9 = Constanta.baseApiUrl + "/absensi/savepresence.php";
 
   static Future<ApiResponse> authentication(dynamic requestBody) async {
     ApiResponse apiResponse;
@@ -59,6 +61,24 @@ class UserLoginServices {
   static Future<ApiResponse> updateData(dynamic requestBody) async {
     ApiResponse apiResponse;
     await BaseApiService.sendPostRequest(endpoint3, "", requestBody)
+        .then((value) {
+      apiResponse = value;
+    });
+    return apiResponse;
+  }
+
+  static Future<ApiResponse> checkLocation(dynamic requestBody) async {
+    ApiResponse apiResponse;
+    await BaseApiService.sendPostRequest(endpoint8, "", requestBody)
+        .then((value) {
+      apiResponse = value;
+    });
+    return apiResponse;
+  }
+
+  static Future<ApiResponse> savePresence(dynamic requestBody) async {
+    ApiResponse apiResponse;
+    await BaseApiService.sendPostRequest(endpoint9, "", requestBody)
         .then((value) {
       apiResponse = value;
     });

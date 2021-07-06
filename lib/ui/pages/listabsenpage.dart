@@ -9,12 +9,15 @@ class _ListAbsensiPageState extends State<ListAbsensiPage> {
   TextEditingController id_matakuliahController = TextEditingController();
   bool isLoading = false;
   String uidc;
+  String userId = "0";
 
   CourseModel courseModel = new CourseModel();
+  UserLoginModel userLoginModel = new UserLoginModel();
   ApiResponse apiResponse;
 
   @override
   void initState() {
+    readUserData();
     super.initState();
   }
 
@@ -115,7 +118,7 @@ class _ListAbsensiPageState extends State<ListAbsensiPage> {
     await storage.write(key: Constanta.keyCourseId, value: uidc);
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => GetLocator()),
+      MaterialPageRoute(builder: (context) => ScanQrCode()),
     );
   }
 
@@ -162,6 +165,11 @@ class _ListAbsensiPageState extends State<ListAbsensiPage> {
                 : RaisedButton(
                     onPressed: () {
                       authentication();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) =>
+                                  ScanQrCode(userLoginModel: userLoginModel)));
                       //Navigator.pushNamed(context, '/si');
                     },
                     elevation: 0,
@@ -178,5 +186,33 @@ class _ListAbsensiPageState extends State<ListAbsensiPage> {
         ],
       ),
     );
+  }
+
+  void readUserData() async {
+    final storage = FlutterSecureStorage();
+    userId = await storage.read(key: Constanta.keyUserId);
+    getDataUserLogin();
+  }
+
+  void getDataUserLogin() {
+    setState(() {
+      isLoading = true;
+    });
+    Map map = {
+      "id": userId,
+    };
+    var requestBody = jsonEncode(map);
+    UserLoginServices.getUserLogin(requestBody).then((value) {
+      //Decode response
+      final result = value;
+      //check status
+      if (result.success == true && result.code == 200) {
+        //parse model and return value
+        userLoginModel = UserLoginModel.fromJson(result.content);
+        setState(() {
+          isLoading = false;
+        });
+      } else {}
+    });
   }
 }

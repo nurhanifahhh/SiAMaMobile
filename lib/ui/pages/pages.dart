@@ -1,5 +1,7 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:supercharged/supercharged.dart';
 import 'package:siamauji1/shared/shared.dart';
@@ -18,8 +20,8 @@ import 'package:intl/intl.dart';
 import 'dart:core';
 import 'package:geolocator/geolocator.dart';
 // import 'package:url_launcher/url_launcher.dart';
-import 'package:qrscan/qrscan.dart' as scanner;
 import 'package:permission_handler/permission_handler.dart';
+import 'package:qr_code_scanner/qr_code_scanner.dart';
 
 part 'general_page.dart';
 part 'screen_page.dart';
@@ -44,7 +46,8 @@ part 'chatscreen.dart';
 part 'calendar.dart';
 part 'getlocator.dart';
 part 'loginadmin.dart';
-part 'scanqrabsen.dart';
+part 'scan.dart';
+part 'scanqrcodepage.dart';
 
 part 'package:siamauji1/models/userloginmodel.dart';
 part 'package:siamauji1/models/adminmodel.dart';
@@ -59,3 +62,5 @@ part 'package:siamauji1/models/adminmessage.dart';
 part 'package:siamauji1/models/message_model.dart';
 part 'package:siamauji1/models/calendar_model.dart';
 part 'package:siamauji1/models/coursemodel.dart';
+part 'package:siamauji1/models/locationmodel.dart';
+part 'package:siamauji1/models/absenmodel.dart';

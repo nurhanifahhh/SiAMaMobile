@@ -31,9 +31,9 @@ class MyApp extends StatelessWidget {
           '/navigation': (BuildContext context) => NavigationBar(),
           '/chatscreen': (BuildContext context) => ChatScreen(),
           '/listabsenpage': (BuildContext context) => ListAbsensiPage(),
-          '/getlocator': (BuildContext context) => GetLocator(),
           '/profile_page': (BuildContext context) => ProfilePage(),
-          '/scanqrabsen': (BuildContext context) => ScanQRAbsen(),
+          '/scan': (BuildContext context) => ScanQrCode(),
+          '/scanqrcodepage': (BuildContext context) => ScanQrCodePage(),
         });
   }
 }
