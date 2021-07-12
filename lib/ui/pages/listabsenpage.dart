@@ -21,40 +21,17 @@ class _ListAbsensiPageState extends State<ListAbsensiPage> {
     super.initState();
   }
 
-  void authentication() {
-    CourseModel courseModel =
-        new CourseModel(id_matakuliah: id_matakuliahController.text);
-
-    var requestBody = jsonEncode(courseModel.toJson());
-    print(requestBody);
-    CourseServices.authentication(requestBody).then((value) {
-      final result = value;
-      if (result.success == true && result.code == 200) {
-        courseModel = CourseModel.fromJson(result.content);
-        uidc = courseModel.id_matakuliah.toString();
-        print(uidc);
-
-        _storeCourseData();
-        id_matakuliahController.text = "";
-        _successDialog();
-      } else {
-        _showDialog();
-      }
-    }).catchError((error) {});
-  }
-
-  Future<void> _showDialog() async {
+  Future<void> _showError() async {
     return showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Error Code Course"),
+            title: Text("Error Course"),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  Text("Code Course is incorrect!"),
-                  Text("Please enter the correct Code Course"),
+                  Text("Please fill the Course ID!"),
                 ],
               ),
             ),
@@ -70,19 +47,18 @@ class _ListAbsensiPageState extends State<ListAbsensiPage> {
         });
   }
 
-  Future<void> _successDialog() async {
+  Future<void> _showDialog() async {
     return showDialog<void>(
         context: context,
         barrierDismissible: false, // user must tap button
         builder: (BuildContext context) {
           return AlertDialog(
-            title: Text("Code Course Success"),
+            title: Text("Error Course"),
             content: SingleChildScrollView(
               child: ListBody(
                 children: <Widget>[
-                  Text("please be absent"),
-                  Text("Lets Start!"),
-                  Text(uidc),
+                  Text("ID Course is incorrect!"),
+                  Text("Please enter the correct ID Course"),
                 ],
               ),
             ),
@@ -90,15 +66,36 @@ class _ListAbsensiPageState extends State<ListAbsensiPage> {
               TextButton(
                 child: Text("OK"),
                 onPressed: () {
-                  // Navigator.pushReplacement(
-                  //   context,
-                  //   MaterialPageRoute(builder: (context) => NavigationBar()),
-                  // );
+                  Navigator.of(context).pop();
                 },
               ),
             ],
           );
         });
+  }
+
+  void authentication() {
+    if (id_matakuliahController.text.trim() == "") {
+      _showError();
+    } else {
+      CourseModel courseModel =
+          new CourseModel(id_matakuliah: id_matakuliahController.text);
+
+      var requestBody = jsonEncode(courseModel.toJson());
+      print(requestBody);
+      CourseServices.authentication(requestBody).then((value) {
+        final result = value;
+        if (result.success == true && result.code == 200) {
+          courseModel = CourseModel.fromJson(result.content);
+          uidc = courseModel.id_matakuliah.toString();
+          print(uidc);
+          _storeCourseData();
+          id_matakuliahController.text = "";
+        } else {
+          _showDialog();
+        }
+      }).catchError((error) {});
+    }
   }
 
   void sendRequestGetDataCourse() {
@@ -118,7 +115,8 @@ class _ListAbsensiPageState extends State<ListAbsensiPage> {
     await storage.write(key: Constanta.keyCourseId, value: uidc);
     Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => ScanQrCode()),
+      MaterialPageRoute(
+          builder: (context) => ScanQrCode(userLoginModel: userLoginModel)),
     );
   }
 
@@ -165,11 +163,7 @@ class _ListAbsensiPageState extends State<ListAbsensiPage> {
                 : RaisedButton(
                     onPressed: () {
                       authentication();
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) =>
-                                  ScanQrCode(userLoginModel: userLoginModel)));
+
                       //Navigator.pushNamed(context, '/si');
                     },
                     elevation: 0,

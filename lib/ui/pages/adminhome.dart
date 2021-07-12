@@ -66,33 +66,6 @@ class _AdminHomeState extends State<AdminHome> {
             new Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
-                GestureDetector(
-                  // onTap: () {
-                  //   Navigator.of(context).push(new CupertinoPageRoute(
-                  //       builder: (context) => Privilages()));
-                  // },
-                  child: new CircleAvatar(
-                    backgroundColor: Color(0xFF0C3B2E),
-                    maxRadius: 70.0,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        new Icon(
-                          Icons.qr_code_rounded,
-                          color: Colors.green,
-                        ),
-                        new SizedBox(
-                          height: 10.0,
-                        ),
-                        new Text("Generate QR Code",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                            )),
-                      ],
-                    ),
-                  ),
-                ),
                 new GestureDetector(
                   // onTap: () {
                   //   Navigator.of(context).push(new CupertinoPageRoute(
@@ -209,33 +182,6 @@ class _AdminHomeState extends State<AdminHome> {
                           height: 10.0,
                         ),
                         new Text("App Course Grades",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                            )),
-                      ],
-                    ),
-                  ),
-                ),
-                GestureDetector(
-                  // onTap: () {
-                  //   Navigator.of(context).push(new CupertinoPageRoute(
-                  //       builder: (context) => Privilages()));
-                  // },
-                  child: new CircleAvatar(
-                    backgroundColor: Color(0xFF0C3B2E),
-                    maxRadius: 70.0,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        new Icon(
-                          Icons.text_snippet,
-                          color: Colors.green,
-                        ),
-                        new SizedBox(
-                          height: 10.0,
-                        ),
-                        new Text("App Presence",
                             style: TextStyle(
                               color: Colors.white,
                               fontSize: 14,

@@ -44,10 +44,10 @@ part 'navigation.dart';
 part 'adminhome.dart';
 part 'chatscreen.dart';
 part 'calendar.dart';
-part 'getlocator.dart';
 part 'loginadmin.dart';
 part 'scan.dart';
 part 'scanqrcodepage.dart';
+part 'infoakdmk.dart';
 
 part 'package:siamauji1/models/userloginmodel.dart';
 part 'package:siamauji1/models/adminmodel.dart';

@@ -47,9 +47,6 @@ class _ProfilPageState extends State<ProfilPage> {
     return GeneralPage(
       title: 'Profile',
       subtitle: "Your Profile Account",
-      onBackButtonPressed: () {
-        Navigator.pushNamed(context, '/sign_in_page');
-      },
       child: Column(
         children: [
           Center(

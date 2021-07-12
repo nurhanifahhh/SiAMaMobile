@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
           '/chatscreen': (BuildContext context) => ChatScreen(),
           '/listabsenpage': (BuildContext context) => ListAbsensiPage(),
           '/profile_page': (BuildContext context) => ProfilePage(),
+          '/infoakdmk': (BuildContext context) => InfoAkdmkPage(),
           '/scan': (BuildContext context) => ScanQrCode(),
           '/scanqrcodepage': (BuildContext context) => ScanQrCodePage(),
         });

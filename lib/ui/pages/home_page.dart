@@ -44,7 +44,7 @@ class _HomePageState extends State<HomePage> {
                     Text(
                       "Dashboard",
                       style: TextStyle(
-                        fontSize: 25.0,
+                        fontSize: 24.0,
                         fontWeight: FontWeight.w600,
                         color: Colors.white,
                       ),
@@ -79,7 +79,7 @@ class _HomePageState extends State<HomePage> {
                             "Hello,",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 22,
+                              fontSize: 21,
                             ),
                           ),
                           SizedBox(
@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
                             userLoginModel.nama ?? "",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: 17,
+                              fontSize: 16,
                             ),
                           ),
                           Text(
@@ -115,14 +115,14 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Positioned(
-            top: 200,
-            height: MediaQuery.of(context).size.height - 260,
+            top: 190,
+            height: MediaQuery.of(context).size.height - 250,
             child: Column(
               children: [
                 Container(
-                  height: 210,
+                  height: 180,
                   width: MediaQuery.of(context).size.width,
-                  padding: EdgeInsets.only(left: 30, right: 30, top: 30),
+                  padding: EdgeInsets.only(left: 30, right: 30, top: 5),
                   decoration: BoxDecoration(
                     color: Colors.grey[100],
                   ),
@@ -140,15 +140,15 @@ class _HomePageState extends State<HomePage> {
                           scrollDirection: Axis.horizontal,
                           children: [
                             Container(
-                              width: 220,
+                              width: 200,
                               height: 300,
                               decoration: BoxDecoration(
                                   image: DecorationImage(
                                       image: AssetImage('assets/imk.png'))),
                             ),
-                            SizedBox(width: 10),
+                            SizedBox(width: 5),
                             Container(
-                              width: 220,
+                              width: 200,
                               height: 300,
                               decoration: BoxDecoration(
                                   image: DecorationImage(
@@ -162,7 +162,7 @@ class _HomePageState extends State<HomePage> {
                 ),
                 Expanded(
                   child: Container(
-                    padding: EdgeInsets.symmetric(horizontal: 10.0),
+                    padding: EdgeInsets.only(left: 30, right: 30, top: 0),
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(color: Colors.white),
                     child: ListView(
@@ -174,10 +174,6 @@ class _HomePageState extends State<HomePage> {
                               fontWeight: FontWeight.bold,
                               color: Colors.black),
                         ),
-                        new SizedBox(
-                          height: 2.0,
-                        ),
-                        // SizedBox(height: 5),
                         new Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
@@ -244,7 +240,7 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                         new SizedBox(
-                          height: 10.0,
+                          height: 5.0,
                         ),
                         new Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -283,7 +279,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             SizedBox(
-                              width: 0.0,
+                              width: 3.0,
                             ),
                             GestureDetector(
                               onTap: () {
@@ -319,36 +315,36 @@ class _HomePageState extends State<HomePage> {
                           ],
                         ),
                         new SizedBox(
-                          height: 10.0,
+                          height: 5.0,
                         ),
                         new Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
                             new GestureDetector(
-                              // onTap: () {
-                              //   Navigator.of(context).push(new CupertinoPageRoute(
-                              //       builder: (context) => AppUsers()));
-                              // },
+                              onTap: () {
+                                Navigator.of(context).push(
+                                    new CupertinoPageRoute(
+                                        builder: (context) => InfoAkdmkPage()));
+                              },
                               child: Container(
                                 // color: Color(0xFFBDBDBD),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
+                                child: Row(
                                   children: <Widget>[
                                     Container(
-                                      width: 50,
-                                      height: 50,
+                                      width: 70,
+                                      height: 70,
                                       decoration: BoxDecoration(
                                           image: DecorationImage(
                                               image: AssetImage(
                                                   'assets/infoakademik.png'))),
                                     ),
                                     new SizedBox(
-                                      height: 10.0,
+                                      width: 5.0,
                                     ),
                                     new Text("Informasi Akademik",
                                         style: TextStyle(
                                           color: Colors.green,
-                                          fontSize: 18,
+                                          fontSize: 20,
                                         )),
                                   ],
                                 ),
@@ -389,6 +385,7 @@ class _HomePageState extends State<HomePage> {
       if (result.success == true && result.code == 200) {
         //parse model and return value
         userLoginModel = UserLoginModel.fromJson(result.content);
+        print(userLoginModel.id);
         setState(() {
           isLoading = false;
         });

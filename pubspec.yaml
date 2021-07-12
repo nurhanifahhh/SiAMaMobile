@@ -68,6 +68,8 @@ flutter:
     - assets/header_home.png
     - assets/screen.png
     - assets/back_arrow.png
+    - assets/pandemi.png
+    - assets/vaksin.jpeg
     - assets/ 
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see

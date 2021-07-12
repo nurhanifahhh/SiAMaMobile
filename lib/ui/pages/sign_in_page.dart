@@ -117,10 +117,6 @@ class _SignInPageState extends State<SignInPage> {
   void _storeUserData() async {
     final storage = FlutterSecureStorage();
     await storage.write(key: Constanta.keyUserId, value: uid);
-    Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => NavigationBar()),
-    );
   }
 
   @override

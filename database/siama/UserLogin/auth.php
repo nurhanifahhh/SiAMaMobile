@@ -17,29 +17,49 @@ $data = json_decode(file_get_contents("php://input"));
 //CHECKING, IF ID AVAILABLE ON $data
 if(isset($data->nim) && isset($data->password)){
     
-    $msg['isAuth'] = 'false';
-    $msg['message'] = '';
+    $apiResponse['success']=false;
+    $apiResponse['code']=200;
+    $apiResponse['messages']="";
+    $apiResponse['content']=null;
     $nim = $data->nim;
     $password = $data->password;
     
     //GET POST BY ID FROM DATABASE
-    $get_post = "SELECT * FROM `user_account` WHERE nim=:nim and password=:password ";
+    $get_post = "SELECT * FROM `user_account` WHERE nim=:nim AND password=:password";
     $get_stmt = $conn->prepare($get_post);
     $get_stmt->bindValue(':nim', $nim,PDO::PARAM_STR);
     $get_stmt->bindValue(':password', $password,PDO::PARAM_STR);
     $get_stmt->execute();
-    
+
     //CHECK WHETHER THERE IS ANY POST IN OUR DATABASE
     if($get_stmt->rowCount() > 0){
-		$msg['isAuth'] = 'true';
-		$msg['message'] = 'User Logged';
+            while($row = $get_stmt->fetch(PDO::FETCH_ASSOC)){
+                $post_data = [
+                    'id' => $row['id'],
+                    'nim' => $row['nim'],
+            'nama' => $row['nama'],
+            'kelas' => $row['kelas'],
+            'jurusan' => $row['jurusan'],
+            'alamat' => $row['alamat'],
+            'notelp' => $row['notelp'],
+            'angkatan' => $row['angkatan'],
+            'password' => $row['password'],
+            'email' => $row['email']
+                 ];
+        
+        }
+
+        $apiResponse['success']=true;
+        $apiResponse['messages'] = 'User Logged';
+        // PUSH POST DATA IN OUR $posts_array ARRAY
+        $apiResponse['content']=$post_data;
+
+        echo json_encode($apiResponse);
     }
     else{
-		$msg['isAuth'] = 'false';
-        $msg['message'] = 'Invalid Email or Password';
-    }  
-    
-    echo  json_encode($msg);
-    
+		$apiResponse['success']=false;
+        $apiResponse['messages'] = 'Invalid NIM or Password';
+        echo json_encode($apiResponse);
+    }
 }
 ?>

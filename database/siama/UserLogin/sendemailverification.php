@@ -31,7 +31,7 @@ $data = json_decode(file_get_contents("php://input"));
     $email = $data->email;
 
     //GET POST BY ID FROM DATABASE
-    $get_data = "SELECT * FROM `user_account` WHERE nim=:nim";
+    $get_data = "SELECT * FROM `user_account` WHERE email=:email";
     $get_stmt = $conn->prepare($get_data);
     $get_stmt->bindValue(':email', $email,PDO::PARAM_STR);
     $get_stmt->execute();
@@ -73,7 +73,7 @@ $data = json_decode(file_get_contents("php://input"));
 	//Content
 	$mail->isHTML(true);
 	$mail->Subject = 'Reset Password For Siama';
-	$mail->Body = 'Your verification code for reset password is<br><b>'.$code.'</b><br>Please do not reply back<br><br>Regards,<br>Solucionis Team';
+	$mail->Body = 'Your verification code for reset password is<b><br>'.$code.'</b><br>Please do not reply back. <br><br>Regards,<br>Siama Team';
 
 	$mail->send();
 
