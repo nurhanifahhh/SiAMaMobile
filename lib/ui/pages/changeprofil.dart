@@ -36,7 +36,7 @@ class _ChangeprofilState extends State<Changeprofil> {
       title: 'Change Profile',
       subtitle: "Edit your profile",
       onBackButtonPressed: () {
-        Navigator.pushNamed(context, '/home_page');
+        Navigator.pushNamed(context, '/navigation');
       },
       child: Form(
         key: _formKey,

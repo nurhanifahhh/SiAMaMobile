@@ -63,7 +63,7 @@ class _ForgotPasswordState extends State<ForgotPassword> {
                 decoration: BoxDecoration(color: Color(0xff0C3B2E)),
                 child: SingleChildScrollView(
                   physics: AlwaysScrollableScrollPhysics(),
-                  padding: EdgeInsets.symmetric(horizontal: 25, vertical: 120),
+                  padding: EdgeInsets.symmetric(horizontal: 25, vertical: 50),
                   child: Form(
                     key: _formKey,
                     child: Column(

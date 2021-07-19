@@ -1,6 +1,6 @@
 part of '../ui/pages/pages.dart';
 
-class AdminServices {
+class AbsensiServices {
   static String endpoint = Constanta.baseApiUrl + "/AdminLogin/auth.php";
   static String endpoint2 = Constanta.baseApiUrl + "/AdminLogin/insert.php";
   static String endpoint3 = Constanta.baseApiUrl + "/AdminLogin/update.php";

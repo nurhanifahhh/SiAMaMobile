@@ -128,33 +128,6 @@ class _AdminHomeState extends State<AdminHome> {
                     ),
                   ),
                 ),
-                GestureDetector(
-                  // onTap: () {
-                  //   Navigator.of(context).push(new CupertinoPageRoute(
-                  //       builder: (context) => AppMessages()));
-                  // },
-                  child: new CircleAvatar(
-                    backgroundColor: Color(0xFF0C3B2E),
-                    maxRadius: 70.0,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        new Icon(
-                          Icons.chat,
-                          color: Colors.green,
-                        ),
-                        new SizedBox(
-                          height: 10.0,
-                        ),
-                        new Text("App Messages",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                            )),
-                      ],
-                    ),
-                  ),
-                ),
               ],
             ),
             new SizedBox(

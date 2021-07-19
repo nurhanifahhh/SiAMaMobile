@@ -1,39 +1,39 @@
 part of 'pages.dart';
 
-class ForgotPasswordAlert extends StatefulWidget {
+class NotificationPage extends StatefulWidget {
   @override
-  _ForgotPasswordAlertState createState() => _ForgotPasswordAlertState();
+  _NotificationPageState createState() => _NotificationPageState();
 }
 
-class _ForgotPasswordAlertState extends State<ForgotPasswordAlert> {
+class _NotificationPageState extends State<NotificationPage> {
   Widget textForgot() {
     return Column(
       children: <Widget>[
         new Center(
           child: new Image.asset(
-            "assets/alert.png",
+            "assets/success.png",
             height: 300.0,
             width: 450.0,
           ),
         ),
         Text(
-          'Congratulations!!!',
+          'No Notice Right Now!',
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: Colors.white,
+            color: Colors.black,
             // height: 3,
-            fontSize: 42,
+            fontSize: 30,
             fontWeight: FontWeight.bold,
           ),
         ),
-        SizedBox(height: 180),
+        SizedBox(height: 40),
         Text(
-          'Your password have been reset',
+          "You're up-to-date! Would Work Well",
           textAlign: TextAlign.center,
           style: TextStyle(
-            color: Colors.white,
+            color: Colors.black,
             // height: 2,
-            fontSize: 20,
+            fontSize: 14,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -48,14 +48,14 @@ class _ForgotPasswordAlertState extends State<ForgotPasswordAlert> {
       child: RaisedButton(
         // onPressed: () => print('Continue Pressed'),
         onPressed: () {
-          Navigator.pushNamed(context, '/sign_in_page');
+          Navigator.pushNamed(context, '/navigation');
         },
         elevation: 5,
         padding: EdgeInsets.all(15),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        color: Color(0xffFFB622),
+        color: Color(0xff0C3B2E),
         child: Text(
-          'Done',
+          'Back To Dashboard',
           style: TextStyle(
               color: Color(0xffffffff),
               fontSize: 18,
@@ -76,14 +76,14 @@ class _ForgotPasswordAlertState extends State<ForgotPasswordAlert> {
               Container(
                 height: double.infinity,
                 width: double.infinity,
-                decoration: BoxDecoration(color: Color(0xff0C3B2E)),
+                decoration: BoxDecoration(color: Color(0xffffffff)),
                 child: SingleChildScrollView(
                   physics: AlwaysScrollableScrollPhysics(),
                   padding: EdgeInsets.symmetric(horizontal: 25, vertical: 120),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      //buildBackBtn(),
+                      //buildBackBtn()
                       //textSuccessed(),
                       textForgot(),
                       SizedBox(height: 0),

@@ -29,12 +29,14 @@ class _ProfilePageState extends State<ProfilePage> {
                           image: DecorationImage(
                               image: AssetImage('assets/visi.png'))),
                     ),
-                    Text(
-                      "Menjadi politeknik generasi baru yang \nbermutu adaptif inovatif dan bermitra \nerat dengan industri dan masyarakat \nuntuk mendukung indonesia Maju \ndan Sejahtera 2045",
-                      style: TextStyle(
-                          fontSize: 15.0,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.black),
+                    Flexible(
+                      child: Text(
+                        "Menjadi politeknik generasi baru yang bermutu adaptif inovatif dan bermitra erat dengan industri dan masyarakat untuk mendukung indonesia Maju dan Sejahtera 2045",
+                        style: TextStyle(
+                            fontSize: 15.0,
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black),
+                      ),
                     ),
                   ],
                 ),
@@ -51,12 +53,14 @@ class _ProfilePageState extends State<ProfilePage> {
                           image: DecorationImage(
                               image: AssetImage('assets/misi.png'))),
                     ),
-                    Text(
-                      "Aktif dalam proses kreasi, penyebaran \ndan penerapan sains dan teknologi \nmelalui layanan pendidikan tinggi \nvokasi dan penelitian terapan yang \nbermutu, terbuka, relevan dan \nberkolaborasi erat dengan masyarakat \ndan industri dengan penerapan tata \nkelola institusi yang baik untuk \nkehidupan bangsa yang lebih baik",
-                      style: TextStyle(
-                        fontSize: 15.0,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.black,
+                    Flexible(
+                      child: Text(
+                        "Aktif dalam proses kreasi, penyebaran dan penerapan sains dan teknologi melalui layanan pendidikan tinggi vokasi dan penelitian terapan yang bermutu, terbuka, relevan dan berkolaborasi erat dengan masyarakat dan industri dengan penerapan tata kelola institusi yang baik untuk kehidupan bangsa yang lebih baik",
+                        style: TextStyle(
+                          fontSize: 15.0,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black,
+                        ),
                       ),
                     ),
                   ],

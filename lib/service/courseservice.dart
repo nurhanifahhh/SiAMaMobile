@@ -6,6 +6,7 @@ class CourseServices {
   static String endpoint3 = Constanta.baseApiUrl + "/Course/update.php";
   static String endpoint4 = Constanta.baseApiUrl + "/Course/delete.php";
   static String endpoint5 = Constanta.baseApiUrl + "/Course/read.php";
+  static String endpoint6 = Constanta.baseApiUrl + "/Course/readcourse.php";
 
   static Future<ApiResponse> authentication(dynamic requestBody) async {
     ApiResponse apiResponse;
@@ -37,6 +38,15 @@ class CourseServices {
   static Future<ApiResponse> getCourse(dynamic requestBody) async {
     ApiResponse apiResponse;
     await BaseApiService.sendPostRequest(endpoint5, "", requestBody)
+        .then((value) {
+      apiResponse = value;
+    });
+    return apiResponse;
+  }
+
+  static Future<ApiResponse> getAllCourse(dynamic requestBody) async {
+    ApiResponse apiResponse;
+    await BaseApiService.sendPostRequest(endpoint6, "", requestBody)
         .then((value) {
       apiResponse = value;
     });

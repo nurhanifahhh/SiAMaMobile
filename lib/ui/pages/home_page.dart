@@ -29,18 +29,6 @@ class _HomePageState extends State<HomePage> {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButton(
-                      icon: new Icon(
-                        Icons.message_outlined,
-                      ),
-                      onPressed: () {
-                        Navigator.pushReplacement(
-                          context,
-                          MaterialPageRoute(builder: (context) => ChatScreen()),
-                        );
-                      },
-                      color: Colors.white,
-                    ),
                     Text(
                       "Dashboard",
                       style: TextStyle(
@@ -49,8 +37,17 @@ class _HomePageState extends State<HomePage> {
                         color: Colors.white,
                       ),
                     ),
-                    Icon(
-                      Icons.notifications,
+                    IconButton(
+                      icon: new Icon(
+                        Icons.notifications,
+                      ),
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => NotificationPage()),
+                        );
+                      },
                       color: Colors.white,
                     ),
                   ],
@@ -178,10 +175,12 @@ class _HomePageState extends State<HomePage> {
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
                             GestureDetector(
-                              // onTap: () {
-                              //   Navigator.of(context).push(new CupertinoPageRoute(
-                              //       builder: (context) => Privilages()));
-                              // },
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => HistoryAbsen()));
+                              },
                               child: Container(
                                 // color: Color(0xFFBDBDBD),
                                 child: Column(
@@ -208,10 +207,12 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                             new GestureDetector(
-                              // onTap: () {
-                              //   Navigator.of(context).push(new CupertinoPageRoute(
-                              //       builder: (context) => AppUsers()));
-                              // },
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => JadwalKuliah()));
+                              },
                               child: Container(
                                 // color: Color(0xFFBDBDBD),
                                 child: Column(
@@ -249,10 +250,11 @@ class _HomePageState extends State<HomePage> {
                               width: 3.0,
                             ),
                             GestureDetector(
-                              // onTap: () {
-                              //   Navigator.of(context).push(new CupertinoPageRoute(
-                              //       builder: (context) => Privilages()));
-                              // },
+                              onTap: () {
+                                Navigator.of(context).push(
+                                    new CupertinoPageRoute(
+                                        builder: (context) => KhsPage()));
+                              },
                               child: Container(
                                 // color: Color(0xFFBDBDBD),
                                 child: Column(

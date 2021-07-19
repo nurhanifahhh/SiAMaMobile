@@ -279,7 +279,7 @@ class _ScanQrCodeState extends State<ScanQrCode> {
                     borderRadius: BorderRadius.all(Radius.circular(8)),
                     borderSide: BorderSide(color: Colors.blueAccent, width: 2),
                   ),
-                  hintText: courseModel.tanggal ?? "",
+                  hintText: courseModel.tglmatkul ?? "",
                   // labelText: courseModel.tanggal ?? "",
                   prefixIcon: Icon(Icons.date_range_outlined),
                 ),

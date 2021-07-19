@@ -14,7 +14,7 @@ class CourseModel {
     this.nama_matakuliah,
     this.id_jadwalkuliah,
     this.hari,
-    this.tanggal,
+    this.tglmatkul,
     this.waktu,
     this.dosen_pengajar,
   });
@@ -23,7 +23,7 @@ class CourseModel {
   String nama_matakuliah;
   String id_jadwalkuliah;
   String hari;
-  String tanggal;
+  String tglmatkul;
   String waktu;
   String dosen_pengajar;
 
@@ -32,7 +32,7 @@ class CourseModel {
         nama_matakuliah: json["nama_matakuliah"],
         id_jadwalkuliah: json["id_jadwalkuliah"],
         hari: json["hari"],
-        tanggal: json["tanggal"],
+        tglmatkul: json["tglmatkul"],
         waktu: json["waktu"],
         dosen_pengajar: json["dosen_pengajar"],
       );
@@ -42,7 +42,7 @@ class CourseModel {
         "nama_matakuliah": nama_matakuliah,
         "id_jadwalkuliah": id_jadwalkuliah,
         "hari": hari,
-        "tanggal": tanggal,
+        "tglmatkul": tglmatkul,
         "waktu": waktu,
         "dosen_pengajar": dosen_pengajar,
       };

@@ -33,7 +33,7 @@ class _ResetPasswordState extends State<ResetPassword> {
       title: 'Change Password',
       subtitle: "Don't forgot your new password",
       onBackButtonPressed: () {
-        Navigator.pushNamed(context, '/home_page');
+        Navigator.pushNamed(context, '/navigation');
       },
       child: Form(
         key: _formKey,
