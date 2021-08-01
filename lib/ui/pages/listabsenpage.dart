@@ -129,7 +129,7 @@ class _ListAbsensiPageState extends State<ListAbsensiPage> {
         children: [
           Container(
             width: double.infinity,
-            margin: EdgeInsets.fromLTRB(defaultMargin, 26, defaultMargin, 6),
+            margin: EdgeInsets.fromLTRB(defaultMargin, 1, defaultMargin, 6),
             child: Text(
               "Please Fill In Correctly",
               style: whiteFontStyle2,
@@ -176,6 +176,371 @@ class _ListAbsensiPageState extends State<ListAbsensiPage> {
                           color: Colors.white, fontWeight: FontWeight.w500),
                     ),
                   ),
+          ),
+          new SizedBox(
+            height: 10.0,
+          ),
+          Container(
+            child: Text(
+              "================================",
+              style: TextStyle(
+                fontSize: 15.0,
+                fontWeight: FontWeight.w600,
+                color: Colors.black,
+              ),
+            ),
+          ),
+          new SizedBox(
+            height: 10.0,
+          ),
+          Text(
+            "Daftar Mata Kuliah beserta Kode Mata Kuliah",
+            style: TextStyle(fontSize: 15, color: Colors.black),
+          ),
+          new SizedBox(
+            height: 10.0,
+          ),
+          new Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              GestureDetector(
+                // onTap: () {
+                //   Navigator.of(context).push(new CupertinoPageRoute(
+                //       builder: (context) => Privilages()));
+                // },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: mainColor,
+                  ),
+                  height: 50,
+                  width: 300,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Text("Pemrograman Umum (PHP)",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          )),
+                    ],
+                  ),
+                ),
+              ),
+              new SizedBox(
+                width: 2.0,
+              ),
+              GestureDetector(
+                // onTap: () {
+                //   Navigator.of(context).push(new CupertinoPageRoute(
+                //       builder: (context) => Privilages()));
+                // },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: mainColor,
+                  ),
+                  height: 50,
+                  width: 50,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Text("IF001",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                          )),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          new SizedBox(
+            height: 5.0,
+          ),
+          new Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              GestureDetector(
+                // onTap: () {
+                //   Navigator.of(context).push(new CupertinoPageRoute(
+                //       builder: (context) => Privilages()));
+                // },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: mainColor,
+                  ),
+                  height: 50,
+                  width: 300,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Text("Project Based Learning (PBL)",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          )),
+                    ],
+                  ),
+                ),
+              ),
+              new SizedBox(
+                width: 2.0,
+              ),
+              GestureDetector(
+                // onTap: () {
+                //   Navigator.of(context).push(new CupertinoPageRoute(
+                //       builder: (context) => Privilages()));
+                // },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: mainColor,
+                  ),
+                  height: 50,
+                  width: 50,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Text("IF002",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                          )),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          new SizedBox(
+            height: 5.0,
+          ),
+          new Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              GestureDetector(
+                // onTap: () {
+                //   Navigator.of(context).push(new CupertinoPageRoute(
+                //       builder: (context) => Privilages()));
+                // },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: mainColor,
+                  ),
+                  height: 50,
+                  width: 300,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Text("Jaringan Komputer",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          )),
+                    ],
+                  ),
+                ),
+              ),
+              new SizedBox(
+                width: 2.0,
+              ),
+              GestureDetector(
+                // onTap: () {
+                //   Navigator.of(context).push(new CupertinoPageRoute(
+                //       builder: (context) => Privilages()));
+                // },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: mainColor,
+                  ),
+                  height: 50,
+                  width: 50,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Text("IF003",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                          )),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          new SizedBox(
+            height: 5.0,
+          ),
+          new Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              GestureDetector(
+                // onTap: () {
+                //   Navigator.of(context).push(new CupertinoPageRoute(
+                //       builder: (context) => Privilages()));
+                // },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: mainColor,
+                  ),
+                  height: 50,
+                  width: 300,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Text("Bahasa Inggris",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          )),
+                    ],
+                  ),
+                ),
+              ),
+              new SizedBox(
+                width: 2.0,
+              ),
+              GestureDetector(
+                // onTap: () {
+                //   Navigator.of(context).push(new CupertinoPageRoute(
+                //       builder: (context) => Privilages()));
+                // },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: mainColor,
+                  ),
+                  height: 50,
+                  width: 50,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Text("IF004",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                          )),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          new SizedBox(
+            height: 5.0,
+          ),
+          new Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              GestureDetector(
+                // onTap: () {
+                //   Navigator.of(context).push(new CupertinoPageRoute(
+                //       builder: (context) => Privilages()));
+                // },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: mainColor,
+                  ),
+                  height: 50,
+                  width: 300,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Text("Matematika",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          )),
+                    ],
+                  ),
+                ),
+              ),
+              new SizedBox(
+                width: 2.0,
+              ),
+              GestureDetector(
+                // onTap: () {
+                //   Navigator.of(context).push(new CupertinoPageRoute(
+                //       builder: (context) => Privilages()));
+                // },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: mainColor,
+                  ),
+                  height: 50,
+                  width: 50,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Text("IF005",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                          )),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          new SizedBox(
+            height: 5.0,
+          ),
+          new Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              GestureDetector(
+                // onTap: () {
+                //   Navigator.of(context).push(new CupertinoPageRoute(
+                //       builder: (context) => Privilages()));
+                // },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: mainColor,
+                  ),
+                  height: 50,
+                  width: 300,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Text("Sistem Informasi",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                          )),
+                    ],
+                  ),
+                ),
+              ),
+              new SizedBox(
+                width: 2.0,
+              ),
+              GestureDetector(
+                // onTap: () {
+                //   Navigator.of(context).push(new CupertinoPageRoute(
+                //       builder: (context) => Privilages()));
+                // },
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: mainColor,
+                  ),
+                  height: 50,
+                  width: 50,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      new Text("IF006",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 18,
+                          )),
+                    ],
+                  ),
+                ),
+              ),
+            ],
+          ),
+          new SizedBox(
+            height: 5.0,
           ),
         ],
       ),

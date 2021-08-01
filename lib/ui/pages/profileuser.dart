@@ -53,8 +53,8 @@ class _ProfilPageState extends State<ProfilPage> {
             child: Stack(
               children: [
                 Container(
-                  width: 130,
-                  height: 130,
+                  width: 100,
+                  height: 100,
                   decoration: BoxDecoration(
                       border: Border.all(
                           width: 4,
@@ -95,146 +95,106 @@ class _ProfilPageState extends State<ProfilPage> {
           ),
           Container(
             width: double.infinity,
-            margin: EdgeInsets.fromLTRB(defaultMargin, 16, defaultMargin, 6),
-            child: Text(
-              "NIM",
-              style: whiteFontStyle2,
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-            padding: EdgeInsets.symmetric(horizontal: 10),
             child: TextField(
               readOnly: true,
               decoration: InputDecoration(
-                  border: InputBorder.none, hintText: userLoginModel.nim),
+                border: InputBorder.none,
+                fillColor: Colors.white,
+                hintText: userLoginModel.nim ?? "",
+                prefixIcon: Icon(Icons.account_circle),
+              ),
+              style: TextStyle(color: Colors.black87),
             ),
           ),
           Container(
             width: double.infinity,
-            margin: EdgeInsets.fromLTRB(defaultMargin, 16, defaultMargin, 6),
-            child: Text(
-              "Nama",
-              style: whiteFontStyle2,
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-            padding: EdgeInsets.symmetric(horizontal: 10),
             child: TextField(
               readOnly: true,
               decoration: InputDecoration(
-                  border: InputBorder.none, hintText: userLoginModel.nama),
+                border: InputBorder.none,
+                fillColor: Colors.white,
+                hintText: userLoginModel.nama ?? "",
+                prefixIcon: Icon(Icons.accessibility),
+              ),
+              style: TextStyle(color: Colors.black87),
             ),
           ),
           Container(
             width: double.infinity,
-            margin: EdgeInsets.fromLTRB(defaultMargin, 16, defaultMargin, 6),
-            child: Text(
-              "Kelas",
-              style: whiteFontStyle2,
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-            padding: EdgeInsets.symmetric(horizontal: 10),
             child: TextField(
               readOnly: true,
               decoration: InputDecoration(
-                  border: InputBorder.none, hintText: userLoginModel.kelas),
+                border: InputBorder.none,
+                fillColor: Colors.white,
+                hintText: userLoginModel.kelas ?? "",
+                prefixIcon: Icon(Icons.class_),
+              ),
+              style: TextStyle(color: Colors.black87),
             ),
           ),
           Container(
             width: double.infinity,
-            margin: EdgeInsets.fromLTRB(defaultMargin, 16, defaultMargin, 6),
-            child: Text(
-              "Jurusan",
-              style: whiteFontStyle2,
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-            padding: EdgeInsets.symmetric(horizontal: 10),
             child: TextField(
               readOnly: true,
               decoration: InputDecoration(
-                  border: InputBorder.none, hintText: userLoginModel.jurusan),
+                border: InputBorder.none,
+                fillColor: Colors.white,
+                hintText: userLoginModel.jurusan ?? "",
+                prefixIcon: Icon(Icons.article),
+              ),
+              style: TextStyle(color: Colors.black87),
             ),
           ),
           Container(
             width: double.infinity,
-            margin: EdgeInsets.fromLTRB(defaultMargin, 16, defaultMargin, 6),
-            child: Text(
-              "Alamat",
-              style: whiteFontStyle2,
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-            padding: EdgeInsets.symmetric(horizontal: 10),
             child: TextField(
               readOnly: true,
               decoration: InputDecoration(
-                  border: InputBorder.none, hintText: userLoginModel.alamat),
+                border: InputBorder.none,
+                fillColor: Colors.white,
+                hintText: userLoginModel.alamat ?? "",
+                prefixIcon: Icon(Icons.add_location),
+              ),
+              style: TextStyle(color: Colors.black87),
             ),
           ),
           Container(
             width: double.infinity,
-            margin: EdgeInsets.fromLTRB(defaultMargin, 16, defaultMargin, 6),
-            child: Text(
-              "Nomor Telepon",
-              style: whiteFontStyle2,
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-            padding: EdgeInsets.symmetric(horizontal: 10),
             child: TextField(
               readOnly: true,
               decoration: InputDecoration(
-                  border: InputBorder.none, hintText: userLoginModel.notelp),
+                border: InputBorder.none,
+                fillColor: Colors.white,
+                hintText: userLoginModel.notelp ?? "",
+                prefixIcon: Icon(Icons.call),
+              ),
+              style: TextStyle(color: Colors.black87),
             ),
           ),
           Container(
             width: double.infinity,
-            margin: EdgeInsets.fromLTRB(defaultMargin, 16, defaultMargin, 6),
-            child: Text(
-              "Angkatan",
-              style: whiteFontStyle2,
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-            padding: EdgeInsets.symmetric(horizontal: 10),
             child: TextField(
               readOnly: true,
               decoration: InputDecoration(
-                  border: InputBorder.none, hintText: userLoginModel.angkatan),
+                border: InputBorder.none,
+                fillColor: Colors.white,
+                hintText: userLoginModel.angkatan ?? "",
+                prefixIcon: Icon(Icons.assignment_ind_outlined),
+              ),
+              style: TextStyle(color: Colors.black87),
             ),
           ),
           Container(
             width: double.infinity,
-            margin: EdgeInsets.fromLTRB(defaultMargin, 16, defaultMargin, 6),
-            child: Text(
-              "Email",
-              style: whiteFontStyle2,
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-            padding: EdgeInsets.symmetric(horizontal: 10),
             child: TextField(
               readOnly: true,
               decoration: InputDecoration(
-                  border: InputBorder.none, hintText: userLoginModel.email),
+                border: InputBorder.none,
+                fillColor: Colors.white,
+                hintText: userLoginModel.email ?? "",
+                prefixIcon: Icon(Icons.contact_mail_outlined),
+              ),
+              style: TextStyle(color: Colors.black87),
             ),
           ),
           Container(

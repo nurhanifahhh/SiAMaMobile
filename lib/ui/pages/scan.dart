@@ -217,7 +217,7 @@ class _ScanQrCodeState extends State<ScanQrCode> {
                   ),
                   hintText: userId,
                   // labelText: courseModel.nama_matakuliah ?? "",
-                  prefixIcon: Icon(Icons.book_online),
+                  prefixIcon: Icon(Icons.person),
                 ),
                 style: TextStyle(color: Colors.black87),
               ),

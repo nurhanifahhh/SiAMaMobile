@@ -122,6 +122,9 @@ class _HomePageState extends State<HomePage> {
                   padding: EdgeInsets.only(left: 30, right: 30, top: 5),
                   decoration: BoxDecoration(
                     color: Colors.grey[100],
+                    borderRadius: BorderRadius.only(
+                        topRight: Radius.circular(40),
+                        topLeft: Radius.circular(40)),
                   ),
                   child: Column(
                     children: [

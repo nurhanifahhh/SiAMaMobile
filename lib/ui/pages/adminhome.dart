@@ -19,189 +19,222 @@ class _AdminHomeState extends State<AdminHome> {
   Size screenSize;
   @override
   Widget build(BuildContext context) {
-    screenSize = MediaQuery.of(context).size;
     return Scaffold(
-      backgroundColor: Color(0xFFFFFFFF),
-      appBar: new AppBar(
-        backgroundColor: Color(0xFF0C3B2E),
-        title: new Text("App Admin"),
-        centerTitle: true,
-        elevation: 0.0,
-        leading: GestureDetector(
-          child: IconButton(
-            icon: new Icon(
-              Icons.search,
+      body: Stack(
+        children: [
+          Container(
+            padding: EdgeInsets.only(left: 30, right: 30, top: 40),
+            color: (Color(0xFF0C3B2E)),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Dashboard Admin",
+                      style: TextStyle(
+                        fontSize: 24.0,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
+                    ),
+                    IconButton(
+                      icon: new Icon(
+                        Icons.logout,
+                      ),
+                      onPressed: () {
+                        _signOut();
+                      },
+                      color: Colors.white,
+                    ),
+                  ],
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Container(
+                      width: 150,
+                      height: 150,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              image: AssetImage('assets/header2.jpeg'))),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(10),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          Text(
+                            "Hello,",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 21,
+                            ),
+                          ),
+                          SizedBox(
+                            height: 2,
+                          ),
+                          Text(
+                            adminModel.nid ?? "",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-            onPressed: () {
-              _signOut();
-            },
-            color: Colors.white,
           ),
-        ),
-        actions: <Widget>[
-          Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: GestureDetector(
-                onTap: () {},
-                child: IconButton(
-                  icon: new Icon(
-                    Icons.logout,
+          Positioned(
+            top: 220,
+            height: MediaQuery.of(context).size.height - 150,
+            child: Column(
+              children: [
+                Expanded(
+                  child: Container(
+                    padding: EdgeInsets.only(left: 30, right: 30, top: 0),
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(color: Colors.white),
+                    child: ListView(
+                      children: [
+                        Text(
+                          "Menu",
+                          style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black),
+                        ),
+                        new SizedBox(
+                          height: 10.0,
+                        ),
+                        new Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: <Widget>[
+                            new GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => HistoryAbsenPage(
+                                            adminModel: adminModel)));
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: mainColor,
+                                    borderRadius: BorderRadius.circular(10)),
+                                height: 150,
+                                width: 120,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    new Icon(
+                                      Icons.history,
+                                      color: Colors.yellow,
+                                      size: 40.0,
+                                    ),
+                                    new SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    new Text("List Absensi",
+                                        style: TextStyle(
+                                          color: Colors.yellow,
+                                          fontSize: 18,
+                                        )),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            new GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => CourseAdminPage(
+                                            adminModel: adminModel)));
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: mainColor,
+                                    borderRadius: BorderRadius.circular(10)),
+                                height: 150,
+                                width: 120,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    new Icon(
+                                      Icons.notifications,
+                                      color: Colors.yellow,
+                                      size: 40.0,
+                                    ),
+                                    new SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    new Text("List Course",
+                                        style: TextStyle(
+                                          color: Colors.yellow,
+                                          fontSize: 18,
+                                        )),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                        new SizedBox(
+                          height: 20.0,
+                        ),
+                        new Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: <Widget>[
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ReadAccountPage(
+                                            adminModel: adminModel)));
+                              },
+                              child: Container(
+                                decoration: BoxDecoration(
+                                    color: mainColor,
+                                    borderRadius: BorderRadius.circular(10)),
+                                height: 150,
+                                width: 120,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: <Widget>[
+                                    new Icon(
+                                      Icons.person,
+                                      color: Colors.yellow,
+                                      size: 40.0,
+                                    ),
+                                    new SizedBox(
+                                      height: 10.0,
+                                    ),
+                                    new Text("Account Users",
+                                        style: TextStyle(
+                                          color: Colors.yellow,
+                                          fontSize: 18,
+                                        )),
+                                  ],
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
                   ),
-                  onPressed: () {
-                    _signOut();
-                  },
-                  color: Colors.white,
-                ),
-              )),
+                )
+              ],
+            ),
+          )
         ],
-      ),
-      //drawer: new Drawer(),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(8.0),
-        child: new Column(
-          children: <Widget>[
-            new SizedBox(
-              height: 20.0,
-            ),
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                new GestureDetector(
-                  // onTap: () {
-                  //   Navigator.of(context).push(new CupertinoPageRoute(
-                  //       builder: (context) => AppUsers()));
-                  // },
-                  child: new CircleAvatar(
-                    backgroundColor: Color(0xFF0C3B2E),
-                    maxRadius: 70.0,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        new Icon(
-                          Icons.history,
-                          color: Colors.green,
-                        ),
-                        new SizedBox(
-                          height: 10.0,
-                        ),
-                        new Text("App Absensi",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                            )),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            new SizedBox(
-              height: 20.0,
-            ),
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                new GestureDetector(
-                  // onTap: () {
-                  //   Navigator.of(context).push(new CupertinoPageRoute(
-                  //       builder: (context) => AppOrders()));
-                  // },
-                  child: new CircleAvatar(
-                    backgroundColor: Color(0xFF0C3B2E),
-                    maxRadius: 70.0,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        new Icon(
-                          Icons.notifications,
-                          color: Colors.green,
-                        ),
-                        new SizedBox(
-                          height: 10.0,
-                        ),
-                        new Text("App Course List",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                            )),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            new SizedBox(
-              height: 20.0,
-            ),
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                GestureDetector(
-                  // onTap: () {
-                  //   Navigator.of(context).push(new CupertinoPageRoute(
-                  //       builder: (context) => OrderHistory()));
-                  // },
-                  child: new CircleAvatar(
-                    backgroundColor: Color(0xFF0C3B2E),
-                    maxRadius: 70.0,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        new Icon(
-                          Icons.grade_outlined,
-                          color: Colors.green,
-                        ),
-                        new SizedBox(
-                          height: 10.0,
-                        ),
-                        new Text("App Course Grades",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                            )),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            new SizedBox(
-              height: 20.0,
-            ),
-            new Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[
-                GestureDetector(
-                  // onTap: () {
-                  //   Navigator.of(context).push(new CupertinoPageRoute(
-                  //       builder: (context) => AppProducts()));
-                  // },
-                  child: new CircleAvatar(
-                    backgroundColor: Color(0xFF0C3B2E),
-                    maxRadius: 70.0,
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        new Icon(
-                          Icons.person,
-                          color: Colors.green,
-                        ),
-                        new SizedBox(
-                          height: 10.0,
-                        ),
-                        new Text("App Account Users",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 14,
-                            )),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            )
-          ],
-        ),
       ),
     );
   }

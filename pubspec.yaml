@@ -70,6 +70,7 @@ flutter:
     - assets/back_arrow.png
     - assets/pandemi.png
     - assets/vaksin.jpeg
+    - assets/header2.jpeg
     - assets/ 
   #   - images/a_dot_ham.jpeg
   # An image asset can refer to one or more resolution-specific "variants", see

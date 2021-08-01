@@ -1,55 +1,55 @@
 part of 'pages.dart';
 
-class JadwalKuliah extends StatefulWidget {
-  final UserLoginModel userLoginModel;
+class ReadAccountPage extends StatefulWidget {
+  final AdminModel adminModel;
 
-  const JadwalKuliah({Key key, this.userLoginModel}) : super(key: key);
+  const ReadAccountPage({Key key, this.adminModel}) : super(key: key);
 
   @override
-  _JadwalKuliahState createState() => _JadwalKuliahState();
+  _ReadAccountPageState createState() => _ReadAccountPageState();
 }
 
-class _JadwalKuliahState extends State<JadwalKuliah> {
-  UserLoginModel userLoginModel = new UserLoginModel();
-  List<CourseModel> listcourse = [];
+class _ReadAccountPageState extends State<ReadAccountPage> {
+  List<UserLoginModel> listuser = [];
   bool isLoading = false;
-
-  String userId = "0";
+  String adminId = "0";
 
   @override
   void initState() {
-    readUserData();
     super.initState();
-    getCourse();
+    getReadUser();
   }
 
   @override
   Widget build(BuildContext context) {
     return GeneralPage(
-      title: 'course schedule',
-      subtitle: "Your course schedule",
+      title: 'User Account',
+      subtitle: "All User Account",
       onBackButtonPressed: () {
-        Navigator.pop(context);
+        Navigator.pushNamed(context, '/adminhome');
       },
       child: isLoading
           ? Center(child: CircularProgressIndicator())
           : Column(
               children: [
-                for (CourseModel item in listcourse)
+                for (UserLoginModel item in listuser)
                   Container(
                     decoration: BoxDecoration(
-                        color: whiteColor,
+                        color: Colors.grey,
                         borderRadius: BorderRadius.circular(10)),
-                    height: 120,
+                    height: 180,
                     width: 370,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: <Widget>[
+                        new SizedBox(
+                          width: 2.0,
+                        ),
                         Container(
                           decoration: BoxDecoration(
-                              color: mainColor,
+                              color: Colors.grey.shade200,
                               borderRadius: BorderRadius.circular(10)),
-                          height: 100,
+                          height: 170,
                           width: 350,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -58,7 +58,7 @@ class _JadwalKuliahState extends State<JadwalKuliah> {
                                 width: 5.0,
                               ),
                               Icon(
-                                Icons.import_contacts,
+                                Icons.person,
                                 color: Colors.green,
                                 size: 40.0,
                               ),
@@ -66,22 +66,34 @@ class _JadwalKuliahState extends State<JadwalKuliah> {
                                 width: 10.0,
                               ),
                               new Text(
-                                  "Nama Matakuliah : " +
-                                      item.nama_matakuliah +
+                                  "Nim : " +
+                                      item.nim +
                                       "\n" +
-                                      "ID Jadwal : " +
-                                      item.id_jadwalkuliah +
+                                      "Nama : " +
+                                      item.nama +
                                       "\n" +
-                                      "Hari : " +
-                                      item.hari +
+                                      "Kelas : " +
+                                      item.kelas +
                                       "\n" +
-                                      "Waktu : " +
-                                      item.waktu +
+                                      "Jurusan : " +
+                                      item.jurusan +
                                       "\n" +
-                                      "Dosen Pengajar : " +
-                                      item.dosen_pengajar,
+                                      "Alamat : " +
+                                      item.alamat +
+                                      "\n" +
+                                      "No.Telp : " +
+                                      item.notelp +
+                                      "\n" +
+                                      "Angkatan : " +
+                                      item.angkatan +
+                                      "\n" +
+                                      "Password : " +
+                                      item.password +
+                                      "\n" +
+                                      "Email : " +
+                                      item.email,
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.green,
                                     fontSize: 16,
                                   )),
                             ],
@@ -100,52 +112,22 @@ class _JadwalKuliahState extends State<JadwalKuliah> {
     );
   }
 
-  void getCourse() {
+  void getReadUser() {
     setState(() {
       isLoading = true;
     });
     Map map = {
-      "id": userId,
+      "idadmin": adminId,
     };
     var requestBody = jsonEncode(map);
     print(requestBody);
-    CourseServices.getAllCourse(requestBody).then((value) {
+    AdminServices.getListUser(requestBody).then((value) {
       //Decode response
       final result = value;
       //check status
       if (result.success == true && result.code == 200) {
-        listcourse = List<CourseModel>.from(
-            result.content.map((x) => CourseModel.fromJson(x)));
-        setState(() {
-          isLoading = false;
-        });
-      } else {}
-    });
-    //print(userLoginModel.id);
-  }
-
-  void readUserData() async {
-    final storage = FlutterSecureStorage();
-    userId = await storage.read(key: Constanta.keyUserId);
-    getDataUserLogin();
-  }
-
-  void getDataUserLogin() {
-    setState(() {
-      isLoading = true;
-    });
-    Map map = {
-      "id": userId,
-    };
-    var requestBody = jsonEncode(map);
-    UserLoginServices.getUserLogin(requestBody).then((value) {
-      //Decode response
-      final result = value;
-      print(result);
-      //check status
-      if (result.success == true && result.code == 200) {
-        //parse model and return value
-        userLoginModel = UserLoginModel.fromJson(result.content);
+        listuser = List<UserLoginModel>.from(
+            result.content.map((x) => UserLoginModel.fromJson(x)));
         setState(() {
           isLoading = false;
         });

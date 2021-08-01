@@ -26,8 +26,6 @@ class MyApp extends StatelessWidget {
           '/notification': (BuildContext context) => NotificationPage(),
           '/loginadmin': (BuildContext context) => AdminLogin(),
           '/adminhome': (BuildContext context) => AdminHome(),
-          '/rekap_absen': (BuildContext context) => RekapAbsenPage(),
-          '/hasil_rekap_absen': (BuildContext context) => HasilRekapAbsenPage(),
           '/navigation': (BuildContext context) => NavigationBar(),
           '/listabsenpage': (BuildContext context) => ListAbsensiPage(),
           '/profile_page': (BuildContext context) => ProfilePage(),
@@ -37,6 +35,11 @@ class MyApp extends StatelessWidget {
           '/khs': (BuildContext context) => KhsPage(),
           '/historyabsen': (BuildContext context) => HistoryAbsen(),
           '/jadwalkuliah': (BuildContext context) => JadwalKuliah(),
+          '/readabsenadmin': (BuildContext context) => HistoryAbsenPage(),
+          '/courseadminpage': (BuildContext context) => CourseAdminPage(),
+          '/readaccountadmin': (BuildContext context) => ReadAccountPage(),
+          '/managecourseadmin': (BuildContext context) => ManageCoursePage(),
+          '/insertcourseadmin': (BuildContext context) => InsertCourse(),
         });
   }
 }

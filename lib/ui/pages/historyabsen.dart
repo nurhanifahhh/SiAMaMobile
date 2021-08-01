@@ -61,12 +61,14 @@ class _HistoryAbsenState extends State<HistoryAbsen> {
                       filled: true,
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(8)),
-                        borderSide: BorderSide(color: Colors.white, width: 2),
+                        borderSide:
+                            BorderSide(color: Colors.greenAccent, width: 2),
                       ),
                       labelText: "Date From",
                       prefixIcon: Icon(
                         Icons.calendar_today_rounded,
-                        size: 50.0,
+                        color: Colors.green,
+                        size: 40.0,
                       ),
                     ),
                     style: TextStyle(color: Colors.black87, fontSize: 18),
@@ -92,35 +94,40 @@ class _HistoryAbsenState extends State<HistoryAbsen> {
                       filled: true,
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(8)),
-                        borderSide: BorderSide(color: Colors.white, width: 2),
+                        borderSide:
+                            BorderSide(color: Colors.greenAccent, width: 2),
                       ),
                       labelText: "Date To",
                       prefixIcon: Icon(
                         Icons.calendar_today_rounded,
-                        size: 50.0,
+                        color: Colors.green,
+                        size: 40.0,
                       ),
                     ),
                     style: TextStyle(color: Colors.black87, fontSize: 18),
                   ),
                 ),
                 Container(
-                  width: double.infinity,
-                  margin:
-                      EdgeInsets.fromLTRB(defaultMargin, 8, defaultMargin, 8),
+                  child: Text(
+                    "===========================",
+                    style: TextStyle(
+                      fontSize: 15.0,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.black,
+                    ),
+                  ),
                 ),
                 for (HistoryModel item in listHistory)
                   Container(
-                    decoration: BoxDecoration(
-                        color: whiteColor,
-                        borderRadius: BorderRadius.circular(10)),
+                    decoration: BoxDecoration(color: Colors.grey.shade200),
                     height: 120,
                     width: 370,
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
                         Container(
                           decoration: BoxDecoration(
-                              color: mainColor,
+                              color: Colors.grey.shade200,
                               borderRadius: BorderRadius.circular(10)),
                           height: 100,
                           width: 350,
@@ -133,20 +140,23 @@ class _HistoryAbsenState extends State<HistoryAbsen> {
                               Icon(
                                 Icons.history,
                                 color: Colors.green,
-                                size: 50.0,
+                                size: 40.0,
                               ),
                               new SizedBox(
                                 width: 10.0,
                               ),
                               new Text(
-                                  item.namaMatakuliah +
+                                  "Nama Matakuliah : " +
+                                      item.namaMatakuliah +
                                       "\n" +
+                                      "Tanggal : " +
                                       DateFormat('dd MMM yyyy HH:mm')
                                           .format(item.tanggal) +
                                       "\n" +
+                                      "Keterangan : " +
                                       item.keterangan,
                                   style: TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.black,
                                     fontSize: 16,
                                   )),
                             ],
