@@ -1,7 +1,7 @@
 part of '../ui/pages/pages.dart';
 
 class Constanta {
-  static String baseApiUrl = "http://192.168.2.11:8080/siama";
+  static String baseApiUrl = "http://siama.my.id";
   // static String baseApiUrl = "http://10.0.2.2/siama";
   static String keyUserId = "userId";
   static String keyAdminId = "adminId";
